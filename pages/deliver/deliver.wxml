@@ -1,0 +1,24 @@
+<view class="container" wx:if='{{total !== 0}}'>
+<wxs module="dateUtil" src="../../utils/timeUtil.wxs"></wxs>
+	<view class="collect">
+	</view>
+	<view wx:for="{{positionList}}" data-item="item" wx:for-index="idx">
+		<view class="content" bindtap="position" data-id='{{item.company.id}}' data-positionid='{{item.id}}' data-positionName='{{item.positionName}}' data-companyName='{{item.company.companyName}}'>
+			<view>
+				<view class="position">{{item.positionName}}</view>
+				<view class="company">{{item.company.companyName}}</view>
+			</view>
+			<view style="margin:0 40rpx 0 0">
+				<view class="position">{{item.operatedHistory[0].operation}}</view>
+				<view class="company">{{dateUtil.dateFormat(item.operatedHistory[0].operatedTime,'yyyy.MM.dd')}}</view>
+			</view>
+		</view>
+		<view class='line'></view>
+	</view>
+</view>
+<view class="container" wx:else>
+	<view>
+		<image style="width:634rpx;margin:400rpx 0 0 60rpx" src="../../icons/wode-toudijianli-zanwujilu.png" mode="widthFix"></image>
+		<view style="font-size:32rpx;color:#555555;text-align:center;">暂无投递</view>
+	</view>
+</view>

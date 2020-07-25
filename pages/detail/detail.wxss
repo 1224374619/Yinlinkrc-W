@@ -1,0 +1,89 @@
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20rpx 0 0 0
+}
+
+.pay {
+  color: #E03020;
+  margin: 40rpx 40rpx 0 0;
+  font-size: 32rpx
+}
+
+.tabs{
+  font-size:70rpx
+}
+
+.position {
+  margin: 30rpx 0 0 40rpx;
+  font-size:40rpx;
+  color:#222222
+}
+
+.company {
+  margin: 28rpx 0 0 25rpx;
+  font-size: 24rpx;
+  color: #555555;
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.company view {
+  padding: 0 0 0 15rpx
+}
+
+.positions {
+  margin: 48rpx 0 0 40rpx;
+  color:#222222;
+  font-size: 40rpx;
+}
+
+.companys {
+  margin: 28rpx 0 0 25rpx;
+  font-size: 24rpx;
+  color: #555555;
+  display: flex;
+  flex-direction: row;
+}
+
+.companys view {
+  padding: 0 0 0 15rpx
+}
+
+.time {
+  margin: 30rpx 40rpx 0 0;
+  font-size: 20rpx;
+  color: #999999;
+}
+
+.title {
+  font-size: 28rpx;
+  font-size: #333333;
+  margin: 40rpx 0 0 40rpx
+}
+
+.backs {
+  background: #327CF3;
+  border-radius: 44rpx;
+  width: 510rpx;
+  color: #fff;
+  height: 88rpx;
+  font-size: 32rpx;
+  line-height: 88rpx;
+  margin: 0 0 0 50rpx ;
+}
+
+.back {
+  background: #327CF3;
+  opacity: 0.4;
+  border-radius: 44rpx;
+  color: #fff;
+  width: 60%;
+  font-size: 32rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  margin: 0 0 0 50rpx ;
+}

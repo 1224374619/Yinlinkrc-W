@@ -1,0 +1,89 @@
+/* pages/login/login.wxss */
+.container{
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  background-color: white;
+}
+
+.nav{
+  width: 100%;
+  margin: 100rpx 0 0 150rpx; 
+  display: flex;
+  justify-content: center;
+  color:#101010;
+}
+.nav-bar{
+  margin: 0 0 0 0;
+  color: #d1d1d1
+}
+.nav-text{
+  margin:0 30rpx 0 0;
+  color: #1f368d
+}
+.nav-textr{
+  margin:0 0 0 30rpx;
+  color: #d1d1d1
+}
+.title{
+  margin:150rpx 0 0 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column
+}
+.title-nav{
+  font-size: 60rpx;
+  color: #327CF3
+}
+.title-bottom{
+  font-size: 35rpx;
+  color: #d1d1d1;
+  margin: 10rpx 0 0 0
+}
+.login {
+  height: 88rpx;
+  color: #fff;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: center;
+  border:2rpx solid #327CF3;
+  background: #327CF3;
+  width: 510rpx;
+  margin: 150rpx 0 30rpx 120rpx;
+  border-radius: 44rpx;
+  line-height: 88rpx
+}
+.weui-cell_input{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+  width: 65vw;
+  margin: 50rpx 0 0 17.5vw;
+  border-bottom: 1rpx solid #d1d1d1;
+  
+}
+.weui-input{
+  height: 70rpx;
+  width: 50vw;
+  
+}
+.place-holder {
+    font-size: 24rpx;
+    margin: 0 0 0 20rpx;
+    color:#c6c6c6
+}
+.text{
+  font-size: 30rpx;
+  margin: 2vh 0 0 130rpx
+}
+.foot{
+  font-size: 30rpx;
+  text-align: center;
+  margin: 40rpx 0 0 0
+}
+
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+  }

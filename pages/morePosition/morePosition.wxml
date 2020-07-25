@@ -1,0 +1,37 @@
+<!-- <view class="container">
+	<wxs src="../../utils/timeUtil.wxs" module="positionCatalog" />
+	<swiper style='margin:0 0 0 0' indicator-dots="{{indicatordots}}" duration="{{duration}}" circular="{{auto}}" autoplay="{{autoplay}}" display-multiple-items='4' next-margin='90rpx'>
+		<block >
+			<swiper-item wx:for='{{workexperseArr}}' data-item="item" data-items="{{workexperseArr}}" bindtap="checkboxWorkexperses">
+				<radio-group bindchange="checkboxWorkexperse" >
+					<view class='label' >
+						<label class="ui-radio {{item.checked==true?'active':''}}">
+							<radio value="{{item.id}}" checked="{{item.checked}}" />
+							<text class="text">{{positionCatalog.positionCatalog(item.positionCatalog)}}</text>
+						</label>
+					</view>
+				</radio-group>
+			</swiper-item>
+		</block>
+	</swiper>
+</view> -->
+<wxs module="dateUtil" src="../../utils/timeUtil.wxs"></wxs>
+<wxs src="../../utils/timeUtil.wxs" module="qualifications" />
+<wxs src="../../utils/timeUtil.wxs" module="CodeToTag" />
+<view class="container">
+	<view class="collect">
+	</view>
+	<view wx:for="{{positionList}}" data-item="item" wx:for-index="idx">
+		<view class="content" bindtap="position" data-id='{{companyId}}' data-positionid='{{item.id}}'>
+			<view>
+				<view class="position">{{item.positionName}}</view>
+				<view class="company">{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | 应届 | {{qualifications.qualifications(item.degreeMin)}}</view>
+			</view>
+			<view style="margin:0 40rpx 0 0">
+				<view class="pay">{{item.salaryMin}}k-{{item.salaryMax}}k</view>
+				<view class="company">{{dateUtil.dateFormat(item.publishedTime,'yyyy.MM.dd')}}</view>
+			</view>
+		</view>
+		<view class='line'></view>
+	</view>
+</view>

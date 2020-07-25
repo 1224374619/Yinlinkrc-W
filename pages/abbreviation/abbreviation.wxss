@@ -1,0 +1,107 @@
+/* pages/login/login.wxss */
+.container{
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  background-color: white;
+}
+
+.title{
+  margin:150rpx 0 0 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column
+}
+.title-nav{
+  font-size: 45rpx;
+  color: #1f368d
+}
+
+.login {
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  color: #FFF;
+  width: 80%;
+  margin: 50rpx 0 0 10%;
+  font-size: 28rpx;
+  background-color: #327CF3;
+  border-radius: 40rpx;
+  line-height: 80rpx;
+}
+.weui-cell_input{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* align-content: center; */
+  flex-direction: row;
+  width: 100%;
+  margin: 50rpx 0 0 0;
+  
+}
+.weui-input{
+  height: 70rpx;
+  width: 70vw;
+  border-bottom: 1rpx solid #d1d1d1;
+}
+.weui-input-code {
+  height: 70rpx;
+  border-bottom: 1rpx solid #d1d1d1;
+}
+.weui-input_nav{
+  height: 70rpx;
+  width: 70vw;
+  
+  border-bottom: 1rpx solid #d1d1d1;
+}
+.weui-button{
+  height: 80rpx;
+  color: #FFF;
+  font-size: 28rpx;
+  background-color: #327CF3;
+  border-radius: 40rpx;
+  line-height: 80rpx;
+  margin: 0 0 0 30rpx
+}
+.weui-code-nav{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  border: 1px solid red
+}
+.we_code{
+  height: 50rpx;
+  display: flex;
+  justify-content: center;
+  color: #FFF;
+  font-size: 28rpx;
+  background-color: #327CF3;
+  margin: 50rpx 0 0 0;
+  border-radius: 40rpx
+}
+.place-holder {
+  font-size: 24rpx;
+  margin: 0 0 0 20rpx;
+  color:#c6c6c6
+}
+.success-fill{
+  display: flex;
+  justify-content: center;
+  margin: 100rpx 0 0 0
+}
+.success-nav{
+  display: flex;
+  justify-content: center;
+  font-size: 50rpx;
+  padding: 30rpx 0 0 0
+}
+.success-foot{
+  display: flex;
+  justify-content: center;
+  color: #d1d1d1;
+  font-size: 45rpx;
+  padding: 30rpx 0 0 30rpx
+}
+.loginButton{
+  line-height: 50rpx
+}

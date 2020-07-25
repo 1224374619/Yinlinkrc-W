@@ -1,0 +1,14 @@
+{
+  "usingComponents": {
+    "select": "../../component/select/select",
+    "i-input": "../../dist/input/index",
+    "i-icon": "../../dist/icon/index",
+    "i-toast": "../../dist/toast/index",
+    "i-load-more": "../../dist/load-more/index"
+  },
+  "navigationBarBackgroundColor": "#327CF3",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

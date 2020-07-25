@@ -1,0 +1,33 @@
+<view style="font-size:28rpx">
+	<form bindsubmit="submitIssue">
+		<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
+			<view>语种</view>
+			<view><input type="text" class="weui-input" name='language' bindinput="language" value="{{language}}" placeholder-class="nickname_placeholder" placeholder="" /></view>
+		</view>
+		<view class="line"></view>
+		<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
+			<view>听力能力</view>
+			<picker bindchange="bindPickerChange" name='listenAndSpeak' value="{{listenAndSpeak}}" range="{{array}}">
+				<view class="picker">
+					<view>{{array[listenAndSpeak]}}
+						<i-icon type="enter" />
+					</view>
+				</view>
+			</picker>
+		</view>
+		<view class="line"></view>
+		<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
+			<view>读写能力</view>
+			<picker bindchange="bindPickerChanges" name='readAndWrite' value="{{readAndWrite}}" range="{{array}}">
+				<view class="picker">
+					<view>{{array[readAndWrite]}}
+						<i-icon type="enter" />
+					</view>
+				</view>
+			</picker>
+		</view>
+		<view class="line"></view>
+		<button form-type="submit" class="button">保存</button>
+		<button bindtap="delete" class="buttons">删除</button>
+		</form>
+</view>

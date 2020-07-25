@@ -1,0 +1,9 @@
+<view style="font-size:28rpx">
+	<form bindsubmit="submitIssue">
+		<view style="display:flex;flex-direction:column;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
+			<view>自我介绍</view>
+			<view style="margin:30rpx 0 0 0"><textarea style="width:100%;margin:0rpx 0 0 0 " value="{{content}}" name='content' bindinput="bindTextAreaBlur" auto-height = false maxlength="-1"	 /></view>
+	</view>
+  <button form-type="submit" class="button">保存</button>
+  	</form>
+</view>

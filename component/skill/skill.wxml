@@ -1,0 +1,22 @@
+<view style="font-size:28rpx">
+<form bindsubmit="submitIssue">
+	<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
+		<view>技能名称</view>
+		<view><input type="text" class="weui-input" name='skill' bindinput="skill" value="{{skill}}" placeholder-class="nickname_placeholder" placeholder="" /></view>
+	</view>
+	<view class="line"></view>
+	<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
+		<view>掌握程度</view>
+		<picker bindchange="bindPickerChange" name='level' value="{{level}}" range="{{array}}">
+			<view class="picker">
+				<view>{{array[level]}}
+					<i-icon type="enter" />
+				</view>
+			</view>
+		</picker>
+	</view>
+	<view class="line"></view>
+	<button form-type="submit" class="button">保存</button>
+	<button bindtap="delete" class="buttons">删除</button>
+	</form>
+</view>

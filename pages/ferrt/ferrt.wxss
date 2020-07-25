@@ -1,0 +1,61 @@
+.input-container {
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 0 0;
+  width: 582rpx;
+  border-radius: 30rpx;
+  border: 1rpx solid #bebebe;
+  height: 60rpx;
+}
+.input-title {
+  margin: 5rpx 0 0 20rpx;
+  font-size: 32rpx;
+  line-height: 55rpx;
+}
+
+.input-icon {
+  width: 5%;
+  margin: 0 3% 0 10%;
+  line-height: 55rpx
+}
+
+.input-cas {
+  height: 60rpx;
+  line-height: 40rpx;
+}
+.nav-input {
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+  margin: 40rpx 0 0 5vw;
+  flex-direction: row;
+  height: 65rpx;
+}
+
+.radius {
+  border-radius: 20rpx;
+}
+
+.label {
+  margin-left: 20rpx;
+  flex-direction: row;
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 2vw;
+}
+.ui-radio {
+  border: 1px solid #D9D9D9;
+  width: 184rpx;
+  height: 52rpx;
+  text-align: center;
+  margin: 28rpx 10rpx 10rpx 30rpx;
+  white-space: nowrap;
+  font-size: 25rpx;
+  line-height: 52rpx;
+  background: #F7F7F7;
+}
+.ui-radio radio,
+.ui-radio checkbox {
+  display: none;
+}

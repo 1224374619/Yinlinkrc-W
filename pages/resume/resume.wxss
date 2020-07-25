@@ -1,0 +1,54 @@
+.title{
+  background: #F3F3F3;
+  width: 100%;
+  height: 110rpx;
+  line-height: 110rpx;
+}
+.base{
+  display: flex;
+  flex-direction: row;
+  color: #555555
+}
+.line {
+  margin: 40rpx 0 0 5%;
+  width: 90%;
+  border: 1rpx solid #F3F3F3;
+}
+.titles{
+  background: #F3F3F3;
+  width: 100%;
+  height: 110rpx;
+  line-height: 110rpx;
+  margin: 0 0 0 0;
+  text-align: center;
+}
+.jobintension {
+  color:#555555;
+}
+.education {
+  color:#555555;
+}
+.work{
+  color:#555555;
+}
+.project{
+  color:#555555;
+}
+.train{
+  color:#555555;
+}
+.language{
+  color:#555555;
+}
+.professional{
+  color:#555555;
+}
+.skill{
+  color:#555555;
+}
+.personal{
+  color:#555555;
+}
+.awards{
+  color:#555555;
+}

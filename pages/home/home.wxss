@@ -1,0 +1,127 @@
+.nav {
+  height: 100%;
+}
+
+.u-wrp-bnr {
+  position: absolute;
+  width: 100%;
+  z-index: -999;
+}
+
+
+.nav-input {
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 0 10vw;
+}
+
+.radius {
+  border-radius: 20rpx;
+}
+
+/* .select-container {
+  width: 130rpx;
+  margin: 30rpx 0 0 0;
+} */
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  margin: 190rpx 0 0 0;
+  width: 600rpx;
+  background: white;
+  border-radius: 40rpx;
+  height: 80rpx;
+}
+
+.input-icon {
+  width: 5%;
+  margin: 0 20rpx 0 30%;
+  line-height: 72rpx;
+}
+
+.input-cas {
+  height: 80rpx;
+  width: 200rpx;
+  line-height: 80rpx;
+  color:#a2a2a2;
+  font-size:28rpx
+}
+
+.content {
+  width: 100%;
+  margin: -30rpx 0 0 0
+}
+.contents {
+  width: 100%;
+  margin: 80rpx 0 0 0
+}
+
+.img {
+  width: 124rpx;
+  height: 124rpx;
+  border-radius: 10rpx;
+  margin: 0 0 0 40rpx
+}
+
+.company-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
+}
+
+.aside {
+  margin: -10rpx 0 0 20rpx
+}
+
+.aside view {
+  padding: 10rpx 0 0 0
+}
+
+.foot {
+  font-size: 25rpx;
+  text-align: right;
+  margin: 0 40rpx 0 0
+}
+
+.line {
+  border: 1rpx solid #eeeeee;
+  margin: 40rpx
+}
+
+.weui-input {
+  font-size: 28rpx;
+  margin: 16rpx;
+}
+
+
+/* 返回顶部 */
+.goTop {
+  height: 120rpx;
+  width: 120rpx;
+  position: fixed;
+  bottom: 40rpx;
+  right: 40rpx;
+  border-radius: 50%;
+  z-index: 555;
+}
+
+/* 轮播 */
+.image_group{
+  margin:0 0 0 40rpx;
+  height: 260rpx;
+}
+
+.swiper_item {
+  width: 188rpx;
+  height: 188rpx;
+  overflow: hidden;
+  border-radius: 10rpx;
+  box-shadow:0px 3px 8px 0px rgba(222,222,222,100) 
+}
+
+.swiper_item image{
+  width: 188rpx;
+  height: 188rpx;
+}

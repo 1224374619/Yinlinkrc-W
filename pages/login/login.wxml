@@ -1,0 +1,41 @@
+<view class='container'>
+	<view class='nav'>
+		<!-- <a class='nav-text'>个人登录</a> -->
+		<!-- <span class='nav-bar'>|</span>
+    <a class='nav-textr'>企业用户</a> -->
+	</view>
+	<view class='title'>
+		<view class="title-nav">银领人才网</view>
+		<view class="title-bottom">懂你的人才网站</view>
+	</view>
+	<form bindsubmit="submitIssue">
+		<view class="weui-cell_input">
+			<view style="margin:0 10rpx 0 0">
+				<i-icon size="20" type="mobilephone_fill" />
+			</view>
+			<view>
+				<input style="margin:0 50rpx 0 0" bindblur="outplaceholders" bindfocus="placeholders" value='{{telValue}}' name='phone' class="weui-input" type="number" placeholder-class="place-holder" bindinput="telValue" placeholder="{{placeholder}}" />
+			</view>
+		</view>
+		<view class="weui-cell_input">
+			<view style="margin:0 10rpx 0 0">
+				<i-icon size="20" type="lock_fill" />
+			</view>
+			<view>
+				<input class="weui-input" bindblur="outplaceholderpwd" bindfocus="placeholderpwd" password='{{isPassword}}' name='password' value='{{passValue}}' type="text" placeholder-class="place-holder" bindinput="passValue" placeholder="{{placeholderpwd}}" />
+			</view>
+			<view wx:if="{{isPassword}}" style="margin:0 0 0 10rpx">
+				<i-icon bindtap='showPassword' size="20" type="browse_fill" />
+			</view>
+			<view wx:else style="margin:0 0 0 10rpx">
+				<i-icon bindtap='showPassword' size="20" type="browse" />
+			</view>
+		</view>
+		<view class="text"><text bindtap="abbreviation">忘记密码？</text></view>
+		<button class='login' form-type="submit">
+			立 即 登 录
+		</button>
+	</form>
+	<i-toast id="toast" />
+	<view class="foot"><text style="color:#d1d1d1">还没有银领账号吗？</text><text bindtap="register" style="color:#327CF3">立即注册</text></view>
+</view>

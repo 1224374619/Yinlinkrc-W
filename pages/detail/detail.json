@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "i-tabs": "../../dist/tabs/index",
+    "i-tab": "../../dist/tab/index",
+    "i-icon": "../../dist/icon/index",
+    "i-button": "../../dist/button/index",
+    "i-modal": "../../dist/modal/index"
+  },
+  "navigationBarTitleText": ""
+}

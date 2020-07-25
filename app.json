@@ -1,0 +1,84 @@
+{
+  "pages": [
+    "pages/home/home",
+    "component/projectadd/projectadd",
+    "component/project/project",
+    "component/work/work",
+    "component/workadd/workadd",
+    "component/personal/personal",
+  
+    "component/baseadd/baseadd",
+    "component/jobintensionadd/jobintensionadd",
+    "pages/login/login",
+
+    "component/jobintension/jobintension",
+    "pages/index/index",
+
+    "pages/morePosition/morePosition",
+    "pages/ferrt/ferrt",
+    "pages/mine/mine",
+    "pages/position/position",
+    "pages/resume/resume",
+    "pages/abbreviation/abbreviation",
+    "pages/register/register",
+    "pages/treaty/treaty",
+    "component/base/base",
+    "component/languageadd/languageadd",
+    "component/language/language",
+    "component/trainadd/trainadd",
+    "component/train/train",
+  
+    "component/education/education",
+    "component/educationadd/educationadd",
+    "component/awardsadd/awardsadd",
+   
+    "component/awards/awards",
+    "component/skill/skill",
+    "component/professional/professional",
+    "pages/detail/detail",
+    "pages/computeredit/computeredit",
+    "pages/deliver/deliver",
+    "pages/collect/collect",
+    "component/select/select",
+    "pages/logs/logs",
+    "pages/contactus/contactus",
+    "component/professionaladd/professionaladd",
+    "component/skilladd/skilladd"
+
+
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {},
+  "component": true,
+  "tabBar": {
+    "color": "#A2A2A2",
+    "selectedColor": "#333333",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [{
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "./icons/zhiwei-weixuanzhong-dibu.png",
+        "selectedIconPath": "./icons/12.png"
+      },
+      {
+        "pagePath": "pages/resume/resume",
+        "text": "简历",
+        "iconPath": "./icons/jianli-weixuanzhong.png",
+        "selectedIconPath": "./icons/jianli-xuanzhong.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "./icons/mine.png",
+        "selectedIconPath": "./icons/wode-xuanzhong.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+<view class='container'>
+	<view class='nav'>
+		<!-- <a class='nav-text'>个人登录</a>
+		<span class='nav-bar'>|</span>
+		<a class='nav-textr'>企业用户</a> -->
+	</view>
+	<view class='title'>
+		<view class="title-nav">银领人才网</view>
+		<view class="title-bottom">懂你的人才网站</view>
+	</view>
+	<form bindsubmit="submitIssue">
+	<view class="weui-cell_input">
+		<input class="weui-input" bindblur="outplaceholders" bindfocus="placeholders" name='phone' type="number" bindinput="getInput" placeholder-class="place-holder" placeholder="{{placeholder}}" />
+	</view>
+	<view class="weui-cell_input">
+		<view style="width:200rpx;">
+			<input class="weui-input-code" bindblur="outplaceholdercode" bindfocus="placeholdercode" name='code' type="number" bindinput="getInputcode" placeholder-class="place-holder" placeholder="{{placeholdercode}}" />
+		</view>
+		<view>
+			<button style="width:300rpx" class="weui-button" bindtap="getCaptcha">
+				{{captchaStatusText}}
+			</button>
+		</view>
+	</view>
+	<view class="weui-cell_input">
+		<input class="weui-input" bindblur="outplaceholderpwd" bindfocus="placeholderpwd" name='password' type="password" bindinput="getInputpass" placeholder-class="place-holder" placeholder="{{placeholderpwd}}" />
+	</view>
+	<button class='login' form-type="submit">
+		立 即 注 册
+	</button>
+	</form>
+	<i-toast id="toast" />
+	<view class="foot" bindtap="treaty">
+		<text style="color:#d1d1d1">进入银领即代表已同意</text>
+		<text style="color:#327CF3">《银领用户协议》</text>
+		<!-- <text style="color:#327CF3">及</text>
+		<text style="color:#327CF3">《银领网用户基本信息》</text> -->
+	</view>
+</view>

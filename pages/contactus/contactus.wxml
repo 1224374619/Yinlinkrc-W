@@ -1,0 +1,66 @@
+<view class='container'>
+  <view class="nav">
+    <swiper class='u-wrp-bnr' indicator-dots='true' autoplay='true' interval='5000' duration='1000' circular='true'>
+      <block wx:for="{{bnrUrl}}" wx:for-index="index">
+        <swiper-item>
+          <image src='{{item.url}}' class='u-img-slide' mode='widthFix'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="content">
+    <i-tabs current="{{ current }}" color="#327CF3" bindchange="handleChange">
+      <i-tab style='width:50%;font-weight:600;color:#222222' key="tab1" title="公司介绍"></i-tab>
+      <i-tab style='width:50%;font-weight:600;color:#222222' key="tab2" title="联系我们"></i-tab>
+    </i-tabs>
+    <view hidden="{{hiddenn}}">
+      <view class="contact">
+        <view>
+          <i-icon type="homepage_fill" />
+        </view>
+        <view style="color:#9e9e9e">公司名称</view>
+        <view>上海银领网络科技有限公司</view>
+      </view>
+      <view class="contact">
+        <view>
+          <i-icon type="coordinates_fill" />
+        </view>
+        <view style="color:#9e9e9e">公司地址</view>
+        <view>上海市静安区中铁中环时代广场7号楼</view>
+      </view>
+      <view class="contact">
+        <view>
+          <i-icon type="computer_fill" />
+        </view>
+        <view style="color:#9e9e9e">邮政编码</view>
+        <view>200000</view>
+      </view>
+      <view class="contact">
+        <view>
+          <i-icon type="interactive_fill" />
+        </view>
+        <view style="color:#9e9e9e">联系电话</view>
+        <view>18116241233</view>
+      </view>
+      <view class="contact">
+        <view>
+          <i-icon type="mail_fill" />
+        </view>
+        <view style="color:#9e9e9e">电子邮箱</view>
+        <view>service@yinlinkrc.com</view>
+      </view>
+    </view>
+    <view hidden="{{hiddenns}}" style="margin:0 0 40rpx 0">
+      <view class="company-title">上海银领网络科技有限公司</view>
+      <view class="company">
+        上海银领网络科技有限公司致力于开发“银领人才”（现代高技能人才）招聘的专业网站。在5G时代到来之际，银领人才网依托互联网PC+移动端以及AI人工智能和大数据打造全新的，属于5G时代的专业招聘网站，为“既动手又动脑”的银领人才求职提供多维度、精准化的招聘服务，为中国智能制造、制造业强国提供高技能人才的支撑。
+      </view>
+      <view class="company">
+        我们坚持以技术为先导、以人力资源服务为载体、以三方共赢为目的的指导方针，为企业引进专业技术人才，力争在招聘服务行业开创全方位技术人才培养、招聘服务的新篇章、为国家技术工匠的招聘与储备提供便利条件。强化服务意识，提供一流的、最完善的服务。
+      </view>
+      <view class="company">
+        我们拥有人性化、制度化、规范化、流程化、标准化的先进管理。 我们拥有众多素质高、技术好、业务强的人才和员工队伍。 我们拥有自主品牌的产品和自主产品的研发队伍。 我们有让银领人才真正实现“一技在手、工作我有。”的坚定目标！
+      </view>
+    </view>
+  </view>
+</view>

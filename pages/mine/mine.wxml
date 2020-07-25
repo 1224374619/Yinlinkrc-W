@@ -1,0 +1,215 @@
+<view class="container" wx:if='{{logout}}'>
+	<nav-components></nav-components>
+	<wxs src="../../utils/timeUtil.wxs" module="CodeToTag" />
+	<i-toast id="toast" />
+  <view class="nav">
+    <view style="margin:100rpx 0 0 0">
+      <view class='cards' bindtap="cards">
+        <view slot="content" class="avatar">
+          <image wx:if='{{avatarUrl}}' style="width:190rpx;height:190rpx;border-radius:95rpx;margin:28rpx 0 0 0" src="{{avatarUrl}}"></image> 
+          <image wx:else style="width:190rpx;height:190rpx;border-radius:95rpx;margin:28rpx 0 0 0" src="../../icons/kong.png"></image>
+          <view wx:if='{{baseList}}'> 
+            <view class='name-text'>{{baseList.fullName}}</view>
+            <view class='infor-text'>
+              <view>{{CodeToTag.CodeToTag([baseList.province,baseList.county],cityList)[1]}}</view>
+              <view style="color:#e1e1e1">|</view>
+              <view>工作{{baseList.workAge}}年</view>
+              <view style="color:#e1e1e1">|</view>
+              <view>{{baseList.age}}岁</view>
+            </view>
+          </view>
+          <view wx:else> 
+            <view style="text-align:center">未填写用户名</view>
+            <view class='infor-text'>
+              <view>请编辑个人信息</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="content">
+    <view class="content-nav" bindtap="resume">
+      <view class="content-nav-collection">
+        <view>
+          <image style="width:28rpx;height:32rpx;margin:15rpx 0 0 10rpx" src="../../icons/wode-wodejianli.png" mode="widthFix"></image>
+        </view>
+        <view style="margin:15rpx 0 0 20rpx;line-height:25rpx">
+          <text>我的简历</text>
+        </view>
+      </view>
+      <view class="content-nav-collection">
+        <view style="margin:25rpx 0 0 20rpx">
+          <text style="color:#327CF3">{{completedPercent}}%</text>
+        </view>
+        <view>
+          <i-icon style="line-height:50rpx" type="enter" color="#999999" size="18" />
+        </view>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="content-nav" bindtap="deliver">
+      <view class="content-nav-collection">
+        <view>
+          <image style="width:28rpx;height:32rpx;margin:15rpx 0 0 10rpx" src="../../icons/wode-toudijilu.png" mode="widthFix"></image>
+        </view>
+        <view style="margin:15rpx 0 0 20rpx;line-height:25rpx">
+          <text>投递记录</text>
+        </view>
+      </view>
+      <view class="content-nav-collection">
+        <view style="margin:25rpx 0 0 20rpx">
+          <text style="color:#327CF3">{{deliverTotal}}</text>
+        </view>
+        <view>
+          <i-icon style="line-height:50rpx" type="enter" color="#999999" size="18" />
+        </view>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="content-nav" bindtap="collect">
+      <view class="content-nav-collection">
+        <view>
+          <image style="width:28rpx;height:32rpx;margin:15rpx 0 0 10rpx" src="../../icons/wode-wodeshoucnag.png" mode="widthFix"></image>
+        </view>
+        <view style="margin:15rpx 0 0 20rpx;line-height:25rpx">
+          <text>我的收藏</text>
+        </view>
+      </view>
+      <view class="content-nav-collection">
+        <view style="margin:25rpx 0 0 20rpx">
+          <text style="color:#327CF3">{{collectTotal}}</text>
+        </view>
+        <view>
+          <i-icon style="line-height:50rpx" type="enter" color="#999999" size="18" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="foots" style="width:100%;height:20rpx;"></view>
+  <view class="foot">
+    <view class="content-nav" bindtap="contact">
+      <view class="content-nav-collection">
+        <view>
+          <image style="width:28rpx;height:32rpx;margin:15rpx 0 0 10rpx" src="../../icons/wode-guanyuwomen.png" mode="widthFix"></image>
+        </view>
+        <view style="margin:15rpx 0 0 20rpx;line-height:25rpx">
+          <text>关于我们</text>
+        </view>
+      </view>
+      <view class="content-nav-collection">
+        <view style="margin:15rpx 0 0 20rpx;line-height:25rpx">
+          <!-- <text>文字描述</text> -->
+        </view>
+        <view>
+          <i-icon type="enter" color="#999999" size="18" style="line-height:50rpx" />
+        </view>
+      </view>
+    </view>
+    <view class='login' bindtap="logOut">
+      退出登录
+    </view>
+  </view>
+</view>
+<view class="container" wx:else>
+	<nav-components></nav-components>
+  <i-modal visible="{{ visible2 }}" bind:cancel="handleClose" show-ok="{{boole}}">
+      <view bindtap="login" style="margin:50rpx auto;width:370rpx;height:80rpx;background: #327CF3;border-radius:20rpx;color:#fff;line-height:80rpx">手机号注册/登录</view>
+  </i-modal>
+	<wxs src="../../utils/timeUtil.wxs" module="CodeToTag" />
+	<i-toast id="toast" />
+  <view class="nav">
+    <view style="margin:100rpx 0 0 0">
+      <view class='cards'>
+        <view slot="content" class="avatar">
+          <image style="width:190rpx;height:190rpx;border-radius:95rpx;margin:28rpx 0 0 0" src="../../icons/kong.png"></image>
+          <view> 
+            <view style="text-align:center" bindtap="handleOpen">点击登录</view>
+            <view class='infor-text'>
+              <view>登录查看更多信息</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="content">
+    <view class="content-nav">
+      <view class="content-nav-collection">
+        <view>
+          <image style="width:28rpx;height:32rpx;margin:15rpx 0 0 10rpx" src="../../icons/wode-wodejianli.png" mode="widthFix"></image>
+        </view>
+        <view style="margin:15rpx 0 0 20rpx;line-height:25rpx">
+          <text>我的简历</text>
+        </view>
+      </view>
+      <view class="content-nav-collection">
+        <view style="margin:25rpx 0 0 20rpx">
+          <!-- <text style="color:#327CF3">{{completedPercent}}%</text> -->
+        </view>
+        <view>
+          <i-icon style="line-height:50rpx" type="enter" color="#999999" size="18" />
+        </view>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="content-nav">
+      <view class="content-nav-collection">
+        <view>
+          <image style="width:28rpx;height:32rpx;margin:15rpx 0 0 10rpx" src="../../icons/wode-toudijilu.png" mode="widthFix"></image>
+        </view>
+        <view style="margin:15rpx 0 0 20rpx;line-height:25rpx">
+          <text>投递记录</text>
+        </view>
+      </view>
+      <view class="content-nav-collection">
+        <view style="margin:25rpx 0 0 20rpx">
+          <!-- <text style="color:#327CF3">{{deliverTotal}}</text> -->
+        </view>
+        <view>
+          <i-icon style="line-height:50rpx" type="enter" color="#999999" size="18" />
+        </view>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="content-nav">
+      <view class="content-nav-collection">
+        <view>
+          <image style="width:28rpx;height:32rpx;margin:15rpx 0 0 10rpx" src="../../icons/wode-wodeshoucnag.png" mode="widthFix"></image>
+        </view>
+        <view style="margin:15rpx 0 0 20rpx;line-height:25rpx">
+          <text>我的收藏</text>
+        </view>
+      </view>
+      <view class="content-nav-collection">
+        <view style="margin:25rpx 0 0 20rpx">
+          <!-- <text style="color:#327CF3">{{collectTotal}}</text> -->
+        </view>
+        <view>
+          <i-icon style="line-height:50rpx" type="enter" color="#999999" size="18" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="foots" style="width:100%;height:20rpx;"></view>
+  <view class="foot">
+    <view class="content-nav" bindtap="contact">
+      <view class="content-nav-collection">
+        <view>
+          <image style="width:28rpx;height:32rpx;margin:15rpx 0 0 10rpx" src="../../icons/wode-guanyuwomen.png" mode="widthFix"></image>
+        </view>
+        <view style="margin:15rpx 0 0 20rpx;line-height:25rpx">
+          <text>关于我们</text>
+        </view>
+      </view>
+      <view class="content-nav-collection">
+        <view style="margin:15rpx 0 0 20rpx;line-height:25rpx">
+          <!-- <text>文字描述</text> -->
+        </view>
+        <view>
+          <i-icon type="enter" color="#999999" size="18" style="line-height:50rpx" />
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

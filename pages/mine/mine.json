@@ -1,0 +1,14 @@
+{
+  "navigationBarBackgroundColor": "#327CF3",
+  "navigationBarTitleText": "",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "i-toast": "../../dist/toast/index",
+    "i-modal": "../../dist/modal/index",
+    "i-card": "../../dist/card/index",
+    "i-avatar": "../../dist/avatar/index",
+    "i-icon": "../../dist/icon/index",
+    "i-button": "../../dist/button/index"
+    
+  }
+}

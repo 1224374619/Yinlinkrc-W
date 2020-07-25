@@ -1,0 +1,18 @@
+<view class="container">
+	<view class="title"></view>
+	<view class="first">
+		<view style="text-align:center">第一步</view>
+		<view style='font-size:27rpx;color:#404040;text-align:center;margin:50rpx 0 0 0'>在电脑浏览器中输入“www.yinlinkrc.com”</view>
+		<view style="display: flex;flex-direction: row;border: 1px solid rgba(50,124,243,0.20);width:70%;margin:50rpx 0 0 13%"><i-input value="{{ value5 }}" placeholder="www.yinlinkrc.com" /><i-icon style="line-height:80rpx;width:20%;padding:0 0 0 60rpx;background: rgba(50,124,243,0.20);" size="20" type="search" /></view>
+	</view>
+  <view class="second">
+		<view style="text-align:center;margin:100rpx 0 0 0">第二步</view>
+		<view style='font-size:27rpx;color:#404040;text-align:center;margin:50rpx 0 0 0'>点击下方按钮，扫面电脑上的二维码</view>
+		<view style="margin:50rpx 0 0 250rpx"><image style="width:50%" src="../../icons/er.png" mode="widthFix"></image></view>
+		<view></view>
+	</view>
+  <view class="third">
+		<view><button class="button">点击扫码</button></view>
+		<view style="margin:40rpx 0 0 0"><button class="buttons">取消扫码</button></view>
+	</view>
+</view>

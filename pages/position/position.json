@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "i-input": "../../dist/input/index",
+    "i-icon": "../../dist/icon/index",
+    "i-button": "../../dist/button/index",
+    "i-load-more": "../../dist/load-more/index"
+  },
+  "navigationBarTitleText": "相关职位(100)",
+  "enablePullDownRefresh": false
+  
+  
+}

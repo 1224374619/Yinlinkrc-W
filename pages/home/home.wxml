@@ -1,0 +1,66 @@
+<view class='container'>
+	<nav-components></nav-components>
+	<wxs src="../../utils/timeUtil.wxs" module="CodeToTag" />
+	<wxs src="../../utils/timeUtil.wxs" module="qualifications" />
+	<wxs module="dateUtil" src="../../utils/timeUtil.wxs"></wxs>
+	<wxs src="../../utils/timeUtil.wxs" module="sub" />
+
+	<view class="nav">
+	  	<view style="margin:-30rpx 0 0 0">
+		<i-load-more wx:if='{{showLoadings}}' />
+	</view>
+		<image class='u-wrp-bnr' src="../../icons/zhiwei-beijing.jpg" mode="widthFix"></image>
+		<view class="nav-input">
+			<view class="input-container" bindtap="keyfocus">
+				<view class="input-icon">
+					<i-icon  size="22" color="#a2a2a2" type="search" />
+				</view>
+				<view class="input" >
+					<view class="input-cas"  maxlength="10">搜索职位</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<i-toast id="toast" />
+	<view class="contents">
+	    <view style="color:#222222;font-size:32rpx;margin:0 0 20rpx 40rpx">热门企业</view>
+			<swiper indicator-dots = "{{indicatordots}}" duration="{{duration}}" circular="{{auto}}"  autoplay = "{{autoplay}}" display-multiple-items='3' next-margin='90rpx'  class="image_group">
+				<block  wx:for='{{imgUrls}}' wx:key='index'>
+					<swiper-item>
+						<view class='swiper_item'>
+							<image src="{{item}}" mode="aspectFill"></image>
+						</view>
+					</swiper-item>
+				</block>
+			</swiper>
+	</view>
+	<view class="content">
+	  <view style="color:#222222;font-size:32rpx;margin:0 0 30rpx 40rpx;">热门职位</view>
+		<view wx:for="{{positionList}}" data-item="item" wx:for-index="idx">
+			<view class="company-list" bindtap="position" data-id='{{item.company.id}}' data-positionid='{{item.id}}' data-positionName='{{item.positionName}}' data-companyName='{{item.company.companyName}}'>
+				<view class='nav'>
+					<image  class="img" src="../../icons/logo.jpg"></image>
+				</view>
+				<view class='aside'>
+					<view style="font-size:32rpx;width:330rpx;color:#222222" wx:if="{{item.positionName.length > 10}}">{{sub.sub(item.positionName)}}</view>
+					<view style="font-size:32rpx;width:330rpx;color:#222222" wx:else>{{item.positionName}}</view>
+					<view style="color:#979797;font-size:28rpx;color:#787878" wx:if="{{item.company.companyName.length > 10}}">{{sub.sub(item.company.companyName)}}</view>
+					<view style="color:#979797;font-size:28rpx;width:330rpx;color:#787878" wx:else>{{item.company.companyName}}</view>
+					<view style="color:#bebebe;font-size:24rpx;color:#a7a7a7" wx:if='{{item.workAgeMin === 0}}'>{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | 无工作经验 | {{qualifications.qualifications(item.degreeMin)}}</view>
+					<view style="color:#bebebe;font-size:24rpx;color:#a7a7a7" wx:elif='{{item.workAgeMin === 10}}'>{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | 10年以上 | {{qualifications.qualifications(item.degreeMin)}}</view>
+					<view style="color:#bebebe;font-size:24rpx;color:#a7a7a7" wx:else>{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | {{item.workAgeMin}}-{{item.workAgeMax}}年 | {{qualifications.qualifications(item.degreeMin)}}</view>
+				</view>
+				<view class='foot'>
+					<view style="color:#F44017;margin:3px 0 0 0;width:200rpx;font-size:28rpx">{{item.salaryMin}}k-{{item.salaryMax}}k/月</view>
+					<view style="font-size:24rpx;color:#999999;margin:29px 0 0 0">{{dateUtil.dateFormat(item.publishedTime,'yyyy-MM-dd')}}</view>
+				</view>
+			</view>
+			<view class="line"></view>
+		</view>
+		<image src="../../icons/top.png" class='goTop' hidden='{{!floorstatus}}' bindtap="goTop" />
+		<view>
+			<i-load-more wx:if='{{showLoading}}' />
+			<i-load-more wx:else tip="暂无数据" loading="{{ false }}" />
+		</view>
+	</view>
+</view>

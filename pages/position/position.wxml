@@ -1,0 +1,307 @@
+<view class="container">
+	<nav-components style='position: absolute;z-index: 130;'></nav-components>
+	<wxs src="../../utils/timeUtil.wxs" module="CodeToTag" />
+	<wxs src="../../utils/timeUtil.wxs" module="qualifications" />
+	<wxs src="../../utils/timeUtil.wxs" module="sub" />
+	<wxs module="dateUtil" src="../../utils/timeUtil.wxs"></wxs>
+
+	<view class='headers'>
+		<view class="nav-input">
+			<view class="input-container">
+				<view class="input-icon">
+					<i-icon type="search" size="17" />
+				</view>
+				<view class="input">
+					<input placeholder-style="font-size:24rpx" bindinput="keyword" value="{{keyword}}" class="input-cas" bindconfirm="bindKeyInput" placeholder="搜索职位/公司" />
+				</view>
+			</view>
+			<view bindtap="keep" class="input-title" wx:if='{{keyword}}'>
+				<text>完成</text>
+			</view>
+			<view bindtap="back" class="input-title" wx:else>
+				<text>取消</text>
+			</view>
+		</view>
+		<view class="header">
+			<view class="section">
+				<picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+					<view class="picker" wx:if='{{city}}'>{{city}}
+						<i-icon type="unfold" />
+					</view>
+					<view class="picker" wx:else>工作地点
+						<i-icon type="unfold" />
+					</view>
+				</picker>
+			</view>
+			<view wx:if="{{active}}" bindtap="show" class="active">{{salary}}
+				<i-icon type="packup" />
+			</view>
+			<view wx:elif="{{activeT}}" bindtap="show" class="activeT">{{salary}}
+				<i-icon type="unfold" />
+			</view>
+			<view wx:else bindtap="show">{{salary}}
+				<i-icon type="unfold" />
+			</view>
+			<view wx:if="{{actives}}" class="active" bindtap="showchose">筛选
+				<image style="height:22rpx;width:22rpx;margin:10rpx 40rpx 0 0" src="../../icons/shai.png"></image>
+			</view>
+			<view wx:elif='{{activeTs}}' bindtap="showchose" class="activeT">筛选
+				<image style="height:22rpx;width:22rpx;margin:10rpx 40rpx 0 0" src="../../icons/shai.png"></image>
+			</view>
+			<view wx:else bindtap="showchose">筛选
+				<image style="height:22rpx;width:22rpx;margin:10rpx 40rpx 0 0" src="../../icons/xiangguanzhiwei-shaixuan.png"></image>
+			</view>
+		</view>
+		<view class='wrapers' wx:if='{{iscontent}}'>
+			<view class='main' wx:if='{{chose}}'>
+				<scroll-view scroll-y class='main-scrolls' style="height:100%;background:#fff" scroll-top="{{scrollTop}}">
+					<view>
+						<view style="font-size:30rpx;font-weight:bold;margin:38rpx 0 10rpx 40rpx;text-align:left">月薪范围</view>
+						<radio-group bindchange="checkboxChange">
+							<view class='label'>
+								<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{checkboxArr}}">
+									<radio value="{{item.id}}" checked="{{item.checked}}" />
+									<text class="text">{{item.name}}</text>
+								</label>
+							</view>
+						</radio-group>
+					</view>
+				</scroll-view>
+			</view>
+			<view class='main' wx:if='{{choses}}'>
+				<scroll-view scroll-y class='main-scrolls' style="height:100%;background:#fff" scroll-top="{{scrollTop}}">
+					<view>
+						<view style="display: flex;flex-direction: column;">
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:38rpx 0 20rpx 40rpx;text-align:left">工作经验</view>
+								<radio-group bindchange="checkboxWorkexperse">
+									<view class='label'>
+										<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{workexperseArr}}">
+											<radio value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</radio-group>
+							</view>
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:40rpx 0 20rpx 30rpx;text-align:left">学历要求</view>
+								<radio-group bindchange="checkboxDegree">
+									<view class='label'>
+										<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{degreeArr}}">
+											<radio value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</radio-group>
+							</view>
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:40rpx 0 20rpx 30rpx;text-align:left">工作类型</view>
+								<radio-group bindchange="checkboxJobType">
+									<view class='label'>
+										<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{jobTypeArr}}">
+											<radio value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</radio-group>
+
+							</view>
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:40rpx 0 20rpx 30rpx;text-align:left">公司规模</view>
+								<radio-group bindchange="checkboxScale">
+									<view class='label'>
+										<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{scaleArr}}">
+											<radio value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</radio-group>
+							</view>
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:40rpx 0 20rpx 30rpx;text-align:left">企业性质</view>
+								<checkbox-group bindchange="checkboxQuality">
+									<view class='label'>
+										<label class="ui-radio {{item.checked == true?'active':''}}" wx:for="{{qualityArr}}" bindtap='checkboxQua' data-index="{{index}}">
+											<checkbox value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</checkbox-group>
+							</view>
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:40rpx 0 20rpx 30rpx;text-align:left">发布时间</view>
+								<radio-group bindchange="checkboxTime">
+									<view class='label'>
+										<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{timeArr}}">
+											<radio value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</radio-group>
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+			<view class='footer' wx:if='{{footer}}'>
+				<view style="display: flex;flex-direction: row;margin:20rpx 0 30rpx 0">
+					<button bindtap='clearn' class="celbutton"> 清除 </button>
+					<button bindtap="confirm" class="cellbutton"> 确定 </button>
+				</view>
+			</view>
+		</view>
+		<view class='wraper' wx:else>
+			<view class='main' wx:if='{{chose}}'>
+				<scroll-view scroll-y class='main-scrolls' style="height:100%;background:#fff" scroll-top="{{scrollTop}}">
+					<view>
+						<view style="font-size:30rpx;font-weight:bold;margin:38rpx 0 10rpx 40rpx;text-align:left">月薪范围</view>
+						<radio-group bindchange="checkboxChange">
+							<view class='label'>
+								<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{checkboxArr}}">
+									<radio value="{{item.id}}" checked="{{item.checked}}" />
+									<text class="text">{{item.name}}</text>
+								</label>
+							</view>
+						</radio-group>
+					</view>
+				</scroll-view>
+			</view>
+			<view class='main' wx:if='{{choses}}'>
+				<scroll-view scroll-y class='main-scrolls' style="height:100%;background:#fff" scroll-top="{{scrollTop}}">
+					<view>
+						<view style="display: flex;flex-direction: column;">
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:38rpx 0 20rpx 40rpx;text-align:left">工作经验</view>
+								<radio-group bindchange="checkboxWorkexperse">
+									<view class='label'>
+										<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{workexperseArr}}">
+											<radio value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</radio-group>
+							</view>
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:40rpx 0 20rpx 30rpx;text-align:left">学历要求</view>
+								<radio-group bindchange="checkboxDegree">
+									<view class='label'>
+										<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{degreeArr}}">
+											<radio value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</radio-group>
+							</view>
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:40rpx 0 20rpx 30rpx;text-align:left">工作类型</view>
+								<radio-group bindchange="checkboxJobType">
+									<view class='label'>
+										<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{jobTypeArr}}">
+											<radio value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</radio-group>
+
+							</view>
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:40rpx 0 20rpx 30rpx;text-align:left">公司规模</view>
+								<radio-group bindchange="checkboxScale">
+									<view class='label'>
+										<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{scaleArr}}">
+											<radio value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</radio-group>
+							</view>
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:40rpx 0 20rpx 30rpx;text-align:left">企业性质</view>
+								<checkbox-group bindchange="checkboxQuality">
+									<view class='label'>
+										<label class="ui-radio {{item.checked == true?'active':''}}" wx:for="{{qualityArr}}" bindtap='checkboxQua' data-index="{{index}}">
+											<checkbox value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</checkbox-group>
+							</view>
+							<view>
+								<view style="font-size:30rpx;font-weight:bold;margin:40rpx 0 20rpx 30rpx;text-align:left">发布时间</view>
+								<radio-group bindchange="checkboxTime">
+									<view class='label'>
+										<label class="ui-radio {{item.checked==true?'active':''}}" bindtap='' wx:for="{{timeArr}}">
+											<radio value="{{item.id}}" checked="{{item.checked}}" />
+											<text class="text">{{item.name}}</text>
+										</label>
+									</view>
+								</radio-group>
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+			<view class='footer' wx:if='{{footer}}'>
+				<view style="display: flex;flex-direction: row;margin:20rpx 0 30rpx 0">
+					<button bindtap='clearn' class="celbutton"> 清除 </button>
+					<button bindtap="confirm" class="cellbutton"> 确定 </button>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view wx:if='{{iscontent}}' class="content">
+		<view wx:for="{{companyList}}" data-item="item" wx:for-index="idx">
+			<view class="company-list" bindtap="position" data-positionid='{{item.id}}' data-id='{{item.company.id}}' data-positionName='{{item.positionName}}' data-companyName='{{item.company.companyName}}'>
+				<view class='nav'>
+					<image class="img" src="../../icons/1.png"></image>
+				</view>
+				<view class='aside'>
+					<view style="font-size:32rpx;width:330rpx" wx:if="{{item.positionName.length > 10}}">{{sub.sub(item.positionName)}}</view>
+					<view style="font-size:32rpx;width:330rpx" wx:else>{{item.positionName}}</view>
+					<view style="color:#979797;font-size:28rpx" wx:if="{{item.company.companyName.length > 10}}">{{sub.sub(item.company.companyName)}}</view>
+					<view style="color:#979797;font-size:28rpx" wx:else>{{item.company.companyName}}</view>
+					<view style="color:#bebebe;font-size:24rpx;" wx:if='{{item.workAgeMin === 0}}'>{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | 无工作经验 | {{qualifications.qualifications(item.degreeMin)}}</view>
+					<view style="color:#bebebe;font-size:24rpx;" wx:else>{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | {{item.workAgeMin}}-{{item.workAgeMax}}年 | {{qualifications.qualifications(item.degreeMin)}}</view>
+				</view>
+				<view class='foot'>
+					<view style="color:#e13627;margin:-5px 0 0 0;width:200rpx;font-size:28rpx">{{item.salaryMin}}k-{{item.salaryMax}}k/每月</view>
+					<view style="font-size:24rpx;color:#979797;margin:33px 0 0 0">{{dateUtil.dateFormat(item.publishedTime,'yyyy-MM-dd')}}</view>
+				</view>
+			</view>
+			<view class="line"></view>
+		</view>
+		<view>
+			<i-load-more wx:if='{{showLoading}}' />
+			<i-load-more wx:else tip="暂无数据" loading="{{ false }}" />
+		</view>
+	</view>
+	<view wx:else class="contents">
+		<view wx:for="{{companyList}}" data-item="item" wx:for-index="idx">
+			<view class="company-list" bindtap="position" data-positionid='{{item.id}}' data-id='{{item.company.id}}' data-positionName='{{item.positionName}}' data-companyName='{{item.company.companyName}}'>
+				<view class='nav'>
+					<image class="img" src="../../icons/1.png"></image>
+				</view>
+				<view class='aside'>
+					<view style="font-size:32rpx;width:330rpx" wx:if="{{item.positionName.length > 10}}">{{sub.sub(item.positionName)}}</view>
+					<view style="font-size:32rpx;width:330rpx" wx:else>{{item.positionName}}</view>
+					<view style="color:#979797;font-size:28rpx" wx:if="{{item.company.companyName.length > 10}}">{{sub.sub(item.company.companyName)}}</view>
+					<view style="color:#979797;font-size:28rpx" wx:else>{{item.company.companyName}}</view>
+					<view style="color:#bebebe;font-size:24rpx;" wx:if='{{item.workAgeMin === 0}}'>{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | 无工作经验 | {{qualifications.qualifications(item.degreeMin)}}</view>
+					<view style="color:#bebebe;font-size:24rpx;" wx:else>{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | {{item.workAgeMin}}-{{item.workAgeMax}}年 | {{qualifications.qualifications(item.degreeMin)}}</view>
+					<!-- <view style="color:#bebebe;font-size:24rpx">{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | {{item.workAgeMin}}-{{item.workAgeMax}}年 | {{qualifications.qualifications(item.degreeMin)}}</view> -->
+				</view>
+				<view class='foot'>
+					<view style="color:#e13627;margin:-5px 0 0 0;width:200rpx;font-size:28rpx">{{item.salaryMin}}k-{{item.salaryMax}}k/每月</view>
+					<view style="font-size:24rpx;color:#979797;margin:33px 0 0 0">{{dateUtil.dateFormat(item.publishedTime,'yyyy-MM-dd')}}</view>
+				</view>
+			</view>
+			<view class="line"></view>
+		</view>
+		<view>
+			<i-load-more wx:if='{{showLoading}}' />
+			<i-load-more wx:else tip="暂无数据" loading="{{ false }}" />
+		</view>
+	</view>
+	<view class='mask-view' capture-catch:touchmove="preventdefault" wx:if="{{mask}}">
+	</view>
+</view>

@@ -1,0 +1,103 @@
+<view class='container'>
+	<wxs module="dateUtil" src="../../utils/timeUtil.wxs"></wxs>
+	<wxs src="../../utils/timeUtil.wxs" module="qualifications" />
+	<wxs src="../../utils/timeUtil.wxs" module="jobType" />
+  <wxs src="../../utils/timeUtil.wxs" module="quality" />
+  <wxs src="../../utils/timeUtil.wxs" module="size" />
+	<wxs src="../../utils/timeUtil.wxs" module="CodeToTag" />
+	<view>
+		<i-tabs  current="{{ current }}" color="#327CF3" bindchange="handleChange">
+			<i-tab style='width:50%;font-weight:600;' key="tab1" title="职位详情"></i-tab>
+			<i-tab style='width:50%;font-weight:600;' key="tab2" title="公司详情"></i-tab>
+		</i-tabs>
+	</view>
+	<view hidden="{{hiddenn}}">
+		<view class="content">
+			<view>
+				<view class="position">{{positionList.positionName}}</view>
+				<view class="company">
+					<view wx:if='{{positionList.workAgeMin}} === 0'>无工作经验</view>
+					<view wx:else>{{positionList.workAgeMin}}-{{positionList.workAgeMax}}年</view>
+					<view>|</view>
+					<view>{{qualifications.qualifications(positionList.degreeMin)}}</view>
+					<view>|</view>
+					<view>{{jobType.jobType(positionList.jobType)}}</view>
+				</view>
+			</view>
+			<view style="text-align:right">
+				<view class="pay">{{positionList.salaryMin}}k-{{positionList.salaryMax}}k</view>
+				<view class="time">发布时间 {{dateUtil.dateFormat(positionList.publishedTime,'yyyy/MM/dd')}}</view>
+			</view>
+		</view>
+		<view style="font-size:20rpx;margin:25rpx 0 0 30rpx;color:#222222">
+			<i-icon type="coordinates" />{{positionList.workAddress.detail}}
+		</view>
+	</view>
+	<view hidden="{{hiddenn}}" style="height:20rpx;background:#f3f3f3;margin:35rpx 0 0 0"></view>
+	<view hidden="{{hiddenn}}">
+		<view class='title'>职位描述</view>
+		<view style="white-space:pre-line;font-size:24rpx;margin:0 30rpx 0 30rpx;color:#555555">
+			{{positionList.description}}
+		</view>
+		<view class='title'>招聘要求</view>
+		<view style="white-space:pre-line;font-size:24rpx;margin:0 30rpx 250rpx 30rpx;color:#555555">
+    {{positionList.requirement}}
+		</view>
+		<view style="display:flex;flex-direction: row;width:100%;height:180rpx;position:fixed;bottom:0rpx;background:#FFFFFF;">
+			<view style="margin:50rpx 0 0 40rpx;display:flex;flex-direction: column;width:120rpx;" wx:if="{{!alwys}}">
+			<view><i-icon bindtap="favorites" style="line-height: 50rpx;margin:0 0 0 25rpx" size="30" color="#999999"  type="collection" /></view>
+			<view style="font-size:24rpx;color:#666666;margin:0 0 0 30rpx">收藏</view>
+			</view>
+			<view style="margin:50rpx 0 0 40rpx;display:flex;flex-direction: column;width:120rpx;" wx:else>
+			<view>
+			<i-icon bindtap="iscancel" style="line-height: 50rpx;margin:0 0 0 25rpx" size="30" color="#327CF3" type="collection_fill" />
+			</view>
+			<view style="font-size:24rpx;color:#666666;margin:0 0 0 20rpx">已收藏</view>
+			</view>
+			<view style="margin:50rpx 0 0 0;display:flex;flex-direction: row;width:100%">
+			<button wx:if="{{!alwy}}" bindtap="submitteds" class="backs">投递简历</button>
+			<button wx:else class="backs">已投递</button>
+			</view>
+		</view>
+		<!-- <view style="margin:50rpx 0 0 0;display:flex;flex-direction: row;"  bindtap="favorites">
+		<i-icon  style="line-height: 80rpx;margin:0 0 0 80rpx" size="30"  type="collection" />
+		<button  class="backs">收藏简历</button>
+		</view>
+		<view style="margin:50rpx 0 0 0;display:flex;flex-direction: row;" >
+		<i-icon  style="line-height: 80rpx;margin:0 0 0 80rpx" size="30" color="#327CF3" type="collection_fill" />
+		<button class="back">已收藏</button>
+		</view> -->
+	</view>
+	<view hidden="{{hiddenns}}">
+		<view class="content">
+			<view>
+				<view class="positions">{{companyList.companyName}}</view>
+				<view class="companys">
+					<view style="width:230rpx">{{CodeToTag.CodeToTag([(companyList.industry/100|int)*100,companyList.industry],industryList)[1]}}</view>
+					<!-- <view>|</view> -->
+					<view>{{quality.quality(companyList.nature)}}</view>
+					<view>|</view>
+					<view>{{size.size(companyList.size)}}</view>
+				</view>
+			</view>
+			<view>
+				<image src='{{companyList.logoUrl}}' style="width:150rpx;height:150rpx;margin:40rpx 40rpx 0 0;border-radius:10rpx"></image>
+			</view>
+		</view>
+	</view>
+	<view hidden="{{hiddenns}}" style="height:20rpx;background:#f3f3f3;margin:35rpx 0 0 0"></view>
+	<view hidden="{{hiddenns}}">
+		<view class='title'>公司简介</view>
+		<view style="font-size:24rpx;margin:0 40rpx 0 40rpx;white-space:pre-line;color:#555555">
+			{{companyList.description}}
+		</view>
+		<view style="display:flex;flex-direction: row;width:100%;height:180rpx;position:fixed;bottom:0rpx;background:#FFFFFF;">
+			<view style="display:flex;flex-direction: row;width:100%">
+			<button style="margin:50rpx auto 50rpx" bindtap="morePosition" data-id='{{companyId}}' class="backs">更多职位</button>
+			</view>
+		</view>
+	</view>
+</view>
+<i-modal visible="{{ visible2 }}" bind:cancel="handleClose" show-ok="{{boole}}">
+      <view bindtap="login" style="margin:50rpx auto;width:370rpx;height:80rpx;background: #327CF3;border-radius:20rpx;color:#fff;line-height:80rpx">手机号注册/登录</view>
+  </i-modal>

@@ -1,0 +1,12 @@
+<view class="select-box">
+  <view class="select-current" catchtap="openClose">
+    <text class="current-name">{{current.name}}</text>
+  </view>
+  <view class="option-list" wx:if="{{isShow}}" catchtap="optionTap">
+    <view class="option" bindtap="mySelect" data-name="公司">公司</view>
+    <view class="option" bindtap="mySelect" data-name="职位">职位</view>
+
+    <!-- <text class="option" wx:for="{{result}}" wx:key="{{item.id}}" data-id="{{item.id}}" data-name="{{item.name}}">{{item.name}}
+    </text> -->
+  </view>
+</view>

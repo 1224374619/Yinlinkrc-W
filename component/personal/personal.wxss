@@ -1,0 +1,11 @@
+.line {
+  margin: 40rpx 0 0 40rpx;
+  width: 90%;
+  border: 1rpx solid #F3F3F3;
+}
+.button {
+  width:60%;
+  background: #327CF3;
+  margin: 50rpx 0 50rpx 20%;
+  color:#fff;
+}

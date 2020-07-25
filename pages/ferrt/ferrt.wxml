@@ -1,0 +1,45 @@
+<view class="container">
+	<view class='headers'>
+		<view class="nav-input">
+			<view class="input-container">
+				<view class="input-icon">
+					<i-icon type="search" size="17" />
+				</view>
+				<view class="input">
+					<input placeholder-style="font-size:24rpx" bindblur="outplaceholderpwd" bindfocus="placeholderpwd" bindinput="keyword" value="{{keyword}}" class="input-cas" bindconfirm="bindKeyInput" placeholder="{{placeholdText}}" />
+				</view>
+			</view>
+			<view  class="input-title" wx:if='{{keyword}}'>
+				<text bindtap="keep">完成</text>
+			</view>
+			<view bindtap="back" class="input-title" wx:else>
+				<text>取消</text>
+			</view>
+		</view>
+	</view>
+	<view style="height:16rpx;background:#F3F3F3;margin:40rpx 0 0 0"></view>
+	<!-- <view style="display:flex;flex-direction: row;font-size:28rpx;color:#222222;margin:40rpx 48rpx 0 48rpx;justify-content:space-between;">
+		<view style="">搜索历史</view>
+		<image src="../../icons/L.png" style="width:30rpx;height:30rpx;margin:10rpx 0 0 0"></image>
+	</view> -->
+	<!-- <radio-group style='margin:30rpx 0 0 0'>
+		<view class='label'>
+			<label class="ui-radio" bindtap='' wx:for="{{listArr}}">
+				<radio value="{{item.id}}" checked="{{item.checked}}" />
+				<text class="text">{{item.name}}</text>
+			</label>
+		</view>
+	</radio-group> -->
+  <!-- <view style="display:flex;flex-direction: row;font-size:28rpx;color:#222222;margin:70rpx 48rpx 0 48rpx;justify-content:space-between;">
+		<view style="">热门搜索</view>
+		<image src="../../icons/L.png" style="width:30rpx;height:30rpx;margin:10rpx 0 0 0"></image>
+	</view> -->
+	<!-- <radio-group style='margin:30rpx 0 0 0'>
+		<view class='label'>
+			<label class="ui-radio" bindtap='' wx:for="{{listArr}}">
+				<radio value="{{item.id}}" checked="{{item.checked}}" />
+				<text class="text">{{item.name}}</text>
+			</label>
+		</view>
+	</radio-group> -->
+</view>

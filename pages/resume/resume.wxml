@@ -1,0 +1,233 @@
+<view class="container" wx:if='{{logout}}'>
+	<nav-components></nav-components>
+	<wxs module="dateUtil" src="../../utils/timeUtil.wxs"></wxs>
+	<wxs src="../../utils/timeUtil.wxs" module="qualifications" />
+	<wxs src="../../utils/timeUtil.wxs" module="jobType" />
+  <wxs src="../../utils/timeUtil.wxs" module="quality" />
+  <wxs src="../../utils/timeUtil.wxs" module="size" />
+	<wxs src="../../utils/timeUtil.wxs" module="politicalStatus" />
+	<wxs src="../../utils/timeUtil.wxs" module="CodeToTag" />
+	<wxs src="../../utils/timeUtil.wxs" module="isUnified" />
+	<wxs src="../../utils/timeUtil.wxs" module="level" />
+	<wxs src="../../utils/timeUtil.wxs" module="jobSearchStatus" />
+	<!-- <view class="title">
+		<i-icon style="margin:0 30rpx 0 50rpx" size="23" type="computer" /><text style="font-size:30rpx">扫码用电脑编辑简历</text>
+	</view> -->
+	<view>
+	  <view wx:if='{{!resumeDetailList.base}}'>
+		<view style="margin:40rpx 0 0 0" bindtap="baseadd">
+					<text style="font-size:40rpx;font-weight:bold;margin:60rpx 10rpx 0 40rpx;">姓名</text>
+					<image style="height:26rpx;width:26rpx;margin:0 0 0 20rpx"  src="../../icons/jianli-bianji.png"></image><text style="font-size:24rpx;margin:0 0 0 5rpx;color:#999999">编辑</text>
+					<view style="font-size:26rpx;margin:20rpx 20rpx 0 40rpx;">我还没填写个人介绍</view>
+				</view>
+		</view>
+		<view wx:else>
+		<view class="base">
+			<view>
+				<view style="margin:40rpx 0 0 0;height:40rpx;" bindtap="base" data-base='{{resumeDetailList.base}}' data-id='{{id}}'>
+					<text style="font-size:40rpx;font-weight:bold;margin:60rpx 10rpx 0 40rpx;">{{resumeDetailList.base.fullName}}</text>
+					<image wx:if='{{resumeDetailList.base.sex == 0}}' style="height:24rpx;width:24rpx;"  src="../../icons/jianli-nan.png"></image>
+					<image wx:else style="height:24rpx;width:24rpx;"  src="../../icons/jianli-nv.png"></image>
+					<image style="height:24rpx;width:24rpx;margin:0 0 0 20rpx" src="../../icons/jianli-bianji.png"></image><text style="font-size:24rpx;margin:0 0 0 5rpx;color:#999999">编辑</text>
+				</view>
+				<view style="display:flex;flex-direction:row;margin:28rpx 0 0 0;" >
+					<view style="margin:8rpx 0 0 0;display:flex;flex-direction:row;">
+					  <image style="height:32rpx;width:32rpx;margin:0 20rpx 0 40rpx"  src="../../icons/jianli-xianjudi.png"></image>
+						<view style="font-size:24rpx;line-height:32rpx;width:120rpx;">{{CodeToTag.CodeToTag([resumeDetailList.base.province,resumeDetailList.base.county],cityList)[1]}}</view>
+					</view>
+					<view style="margin:8rpx 0 0 0;display:flex;flex-direction:row;">
+					  <image style="height:32rpx;width:32rpx;margin:0 20rpx 0 15rpx"  src="../../icons/jianli-nianling.png"></image>
+						<view style="font-size:24rpx;line-height:32rpx">{{resumeDetailList.base.age}}岁</view>
+					</view>
+					<view style="margin:8rpx 0 0 0;display:flex;flex-direction:row;">
+						<image style="height:32rpx;width:32rpx;margin:0 20rpx 0 40rpx"  src="../../icons/zhengzhibeij.png"></image>
+						<view style="font-size:24rpx;line-height:32rpx">{{politicalStatus.politicalStatus(resumeDetailList.base.politicalStatus)}}</view>
+					</view>
+				</view>
+				<view style="display:flex;flex-direction:row;">
+					<view style="margin:20rpx 0 0 0;display:flex;flex-direction:row;">
+						<image style="height:32rpx;width:32rpx;margin:0 20rpx 0 40rpx"  src="../../icons/jianli-xueli.png"></image>
+						<view style="font-size:24rpx;line-height:32rpx">{{qualifications.qualifications(resumeDetailList.base.degree)}}</view>
+					</view>
+					<view style="margin:20rpx 0 0 50rpx;display:flex;flex-direction:row;">
+						<image style="height:32rpx;width:32rpx;margin:0 20rpx 0 40rpx"  src="../../icons/jianli-gonhgzuojingyan.png"></image>
+						<view style="font-size:24rpx;line-height:32rpx" wx:if='{{resumeDetailList.base.workAge === 0}}'>无工作经验</view>
+						<view style="font-size:24rpx;line-height:32rpx" wx:else>{{resumeDetailList.base.workAge}}年工作经验</view>
+					</view>
+				</view>
+			</view> 
+			<view style="margin:40rpx 0 0 70rpx" wx:if='{{avatarUrl}}' bindtap="base" data-base='{{resumeDetailList.base}}' data-id='{{id}}'>
+		  	<image style="width:152rpx;height:152rpx;border-radius:76rpx;" src="{{avatarUrl}}" ></image> 
+			</view>
+			<view style="margin:40rpx 0 0 70rpx" bindtap="base" data-base='{{resumeDetailList.base}}' data-id='{{id}}' wx:else>
+        <image style="width:152rpx;height:152rpx;border-radius:76rpx;" src="../../icons/3.png"></image>
+			</view>
+		</view>
+		<view style="display:flex;flex-direction:row;color:#555555">
+			<view style="margin:20rpx 0 0 0;display:flex;flex-direction:row;">
+				<image style="height:32rpx;width:32rpx;margin:0 20rpx 0 40rpx;"  src="../../icons/jianli-dianhua.png"></image>
+				<view style="font-size:24rpx;line-height:32rpx">{{resumeDetailList.base.phone}}</view>
+			</view>
+			<view style="margin:20rpx 0 0 0;display:flex;flex-direction:row;">
+				<image style="height:32rpx;width:32rpx;margin:0 20rpx 0 40rpx;line-height:32rpx;"  src="../../icons/jianli-youxiang.png"></image>
+				<view style="font-size:24rpx;line-height:32rpx">{{resumeDetailList.base.email}}</view>
+			</view>
+		</view>
+		</view>
+		<view class="line"></view>
+		<view class="jobintension" wx:if='{{!resumeDetailList.target}}'>
+			<view style="margin:40rpx 40rpx 0 40rpx;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" data-target='{{resumeDetailList.target}}' bindtap="jobintensionadd">求职意向<image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jianli-bianji.png"></image></view>
+		</view>
+		<view class="jobintension" wx:else>
+			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" data-target='{{resumeDetailList.target}}' bindtap="jobintension"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>求职意向</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jianli-bianji.png"></image></view>
+			<view style="margin:30rpx 0 0 40rpx;font-size:28rpx;">职位类型：{{CodeToTag.CodeToTag([((resumeDetailList.target.positionCatalogs[0].code/100|int)*100/10000|int)*10000,(resumeDetailList.target.positionCatalogs[0].code/100|int)*100,resumeDetailList.target.positionCatalogs[0].code],positionCatalogList)[2]}}</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">企业行业：{{CodeToTag.CodeToTag([(resumeDetailList.target.industries[0].code/100|int)*100,resumeDetailList.target.industries[0].code],industryList)[1]}}</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">工作城市：{{CodeToTag.CodeToTag([resumeDetailList.target.province,resumeDetailList.target.county],cityList)[1]}}</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx" wx:if='{{resumeDetailList.target.salaryMin === 35}}'>薪资范围：{{resumeDetailList.target.salaryMin}}k以上</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx" wx:else>薪资范围：{{resumeDetailList.target.salaryMin}}k - {{resumeDetailList.target.salaryMax}}k</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">工作类型：{{jobType.jobType(resumeDetailList.target.jobType)}}</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">求职状态：{{jobSearchStatus.jobSearchStatus(resumeDetailList.target.jobSearchStatus)}}</view>
+		</view>
+		<view class="line"></view>
+		<view class="education">
+			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="educationadd"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>教育经历</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jia.png"></image></view>
+			<view wx:for="{{resumeDetailList.eduExpr}}" data-item="item" wx:for-index="idx" bindtap="education" data-edu='{{item}}' style="margin-bottom:40rpx">
+				<view style="margin:30rpx 0 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;justify-content:space-between">
+				  <view>
+						<text>{{item.school}}</text>
+						<text style="margin:0 0 0 20rpx;width:200rpx;">{{item.major}}</text>
+					</view>
+					<view style="margin:0 40rpx 0 0">
+						<text style="margin:0 0 0 160rpx;color:#999999;font-size:24rpx">{{dateUtil.dateFormat(item.beginTime,'yyyy.MM')}}-{{dateUtil.dateFormat(item.endTime,'yyyy.MM')}}</text>
+						<i-icon style="line-height:2rpx;margin:4rpx 0 0 0" color="#999999"  type="enter" />
+					</view>
+				</view>
+				<view style="margin:20rpx 0 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;">
+					<text>{{qualifications.qualifications(item.degree)}}</text>
+					<text style="margin:0 0 0 20rpx">{{isUnified.isUnified(item.isUnified)}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="line"></view>
+		<view class="work">
+			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="workadd"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>工作经历</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jia.png"></image></view>
+			<view wx:for="{{resumeDetailList.workExpr}}" data-item="item" wx:for-index="idx" bindtap="work" data-work='{{item}}' style="margin-bottom:40rpx">
+			<view style="margin:30rpx 0 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;justify-content:space-between">
+			<view>
+			<text style="width:200rpx;">{{item.company}}</text>
+			</view>
+				<view style="margin:0 40rpx 0 0">
+				<text style="margin:0 0 0 160rpx;color:#999999;font-size:24rpx">{{dateUtil.dateFormat(item.beginTime,'yyyy.MM')}}-{{dateUtil.dateFormat(item.endTime,'yyyy.MM')}}</text>
+				<i-icon  style="line-height:2rpx;margin:4rpx 0 0 0;" color="#999999" type="enter" /></view>
+			</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;">
+				<text>{{item.position}}</text>
+				<!-- <text style="margin:0 0 0 20rpx">薪资</text> -->
+			</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">工作内容：{{item.description}}</view>
+			</view>
+		</view>
+		<view class="line"></view>
+		<view class="project">
+			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="projectadd"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>项目经历</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jia.png"></image></view>
+			<view wx:for="{{resumeDetailList.projects}}" data-item="item" wx:for-index="idx" bindtap="project" data-project='{{item}}' style="margin-bottom:40rpx">
+			<view style="margin:30rpx 0 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;justify-content:space-between">
+			<view>
+			<text style="width:200rpx;">{{item.project}}</text>
+			</view>
+			<view style="margin:0 40rpx 0 0">
+			  <text style="margin:0 0 0 160rpx;color:#999999;font-size:24rpx">{{dateUtil.dateFormat(item.beginTime,'yyyy.MM')}}-{{dateUtil.dateFormat(item.endTime,'yyyy.MM')}}</text>
+				<i-icon  style="line-height:2rpx;margin:4rpx 0 0 0" color="#999999" type="enter" />
+			</view>	
+			</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">个人职责：{{item.duty}}</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">项目介绍：{{item.description}}</view>
+			</view>
+		</view>
+		<view class="line"></view>
+		<view class="train">
+			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="trainadd"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>培训经历</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jia.png"></image></view>
+			<view wx:for="{{resumeDetailList.training}}" data-item="item" wx:for-index="idx" bindtap="train" data-train='{{item}}' style="margin-bottom:40rpx">
+
+      <view style="margin:30rpx 0 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;justify-content:space-between">
+			<view>
+			<text style="width:200rpx;">培训课程：{{item.lesson}}<i-icon color="#999999"  type="enter" /></text>
+			</view>
+			<view style="margin:0 40rpx 0 0">
+			  <text style="margin:0 0 0 160rpx;color:#999999;font-size:24rpx">{{dateUtil.dateFormat(item.beginTime,'yyyy.MM')}}-{{dateUtil.dateFormat(item.endTime,'yyyy.MM')}}</text>
+				<i-icon  style="line-height:2rpx;margin:4rpx 0 0 0" color="#999999" type="enter" />
+			</view>	
+			</view>
+	    <view style="margin:20rpx 0 0 40rpx;font-size:28rpx">培训机构：{{item.institution}}</view>
+			</view>
+		</view>
+		<view class="line"></view>
+		<view class="language">
+			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="languageadd"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>语言能力</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jia.png"></image></view>
+			<view wx:for="{{resumeDetailList.languages}}" data-item="item" wx:for-index="idx" data-language='{{item}}' bindtap="language" style="margin-bottom:40rpx">
+			<view style="margin:30rpx 40rpx 0 40rpx;font-size:28rpx;display:flex;justify-content:space-between">语种：{{item.language}}<i-icon color="#999999" type="enter" /></view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">听说能力：{{level.level(item.listenAndSpeak)}}</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">读写能力：{{level.level(item.readAndWrite)}}</view>
+			</view>
+		</view>
+		<view class="line"></view>
+		<view class="professional">
+			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="professionaladd"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>职称等级</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jia.png"></image></view>
+			<view wx:for="{{resumeDetailList.qualifications}}" data-item="item" wx:for-index="idx" style="margin:30rpx 40rpx 0 40rpx;font-size:28rpx;display:flex;justify-content:space-between" data-qualifications='{{item}}' bindtap="professional">职称等级名称：{{item.qual}} <i-icon color="#999999" type="enter" /></view>
+		</view>
+		<view class="line"></view>
+		<view class="skill">
+			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="skilladd"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>专业技能</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jia.png"></image></view>
+			<view wx:for="{{resumeDetailList.skills}}" data-item="item" wx:for-index="idx" bindtap="skill" data-skill='{{item}}' style="margin-bottom:40rpx">
+			<view style="margin:30rpx 40rpx 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;justify-content:space-between">
+				<text>技能名称：{{item.skill}}</text>
+				<!-- <text style="margin:0 0 0 360rpx">2020.02-2020.09</text> -->
+				<i-icon  style="line-height:2rpx;margin:4rpx 0 0 0" color="#999999" type="enter" />
+			</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx;">
+				<text>掌握程度：{{level.level(item.level)}}</text>
+			</view>
+			<!-- <view style="margin:20rpx 0 0 40rpx;font-size:28rpx">证书</view> -->
+			</view>
+		</view>
+		<view class="line"></view>
+		<view class="awards">
+			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="awardsadd"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>荣誉奖项</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jia.png"></image></view>
+			<view wx:for="{{resumeDetailList.awards}}" data-item="item" wx:for-index="idx" bindtap="awards" data-awards='{{item}}' style="margin-bottom:40rpx">
+			<view style="margin:30rpx 40rpx 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;justify-content:space-between">
+			  <view style="width:450rpx;font-size:28rpx;">
+				  <view>奖项名称: {{item.award}}</view>
+				</view>
+				<view style="color:#999999;font-size:24rpx">
+					<text>{{dateUtil.dateFormat(item.acquiredTime,'yyyy.MM')}}</text>
+					<i-icon style="line-height:2rpx;margin:4rpx 0 0 0" color="#999999" type="enter" />
+				</view>
+			</view>
+			<!-- <view style="margin:20rpx 0 0 40rpx;font-size:28rpx">证书</view> -->
+			</view>
+		</view>
+		<view class="line"></view>
+		<view class="personal">
+			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="personal" data-evaluation='{{resumeDetailList.evaluation}}'><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>自我介绍</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jianli-bianji.png"></image></view>
+			<view style="margin:30rpx 40rpx 0 40rpx;font-size:28rpx;width:90%">{{resumeDetailList.evaluation.content}}</view>
+		</view>
+		<view class="line"></view>
+	</view>
+	<view class="titles">
+		<text style="margin:0 30rpx 0 50rpx;font-size:28rpx;color:#767676">简历更新于 {{dateUtil.dateFormat(resumeDetailList.updatedTime,'yyyy.MM.dd hh:mm:ss')}}</text>
+	</view>
+</view>
+<view class="container" wx:else>
+<i-modal visible="{{ visible2 }}" bind:cancel="handleClose" show-ok="{{boole}}">
+      <view bindtap="login" style="margin:50rpx auto;width:370rpx;height:80rpx;background: #327CF3;border-radius:20rpx;color:#fff;line-height:80rpx">手机号注册/登录</view>
+  </i-modal>
+	<view>
+		<image style="width:634rpx;margin:248rpx 0 0 60rpx;" src="../../icons/wode-toudijianli-zanwujilu.png" mode="widthFix"></image>
+		<view style="font-size:32rpx;color:#555555;text-align:center;">您还没有登录哦～
+		</view>
+		<view style="font-size:32rpx;color:#555555;text-align:center;">
+		登录后可添加个人简历</view>
+		<view style="font-size:32rpx;color:#fff;text-align:center;width:510rpx;height:88rpx;border-radius:44rpx;background: #327CF3;box-shadow: 0px 6px 9px 0px rgba(180,209,255,1);line-height:88rpx;margin:40rpx 0 0 120rpx" bindtap="handleOpen">
+		去登录</view>
+	</view>
+</view>

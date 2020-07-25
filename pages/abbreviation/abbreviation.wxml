@@ -1,0 +1,40 @@
+<view class='container' hidden="{{hiddenn}}">
+	<view class='title'>
+		<view class="title-nav">忘记密码</view>
+	</view>
+	<form bindsubmit="submitIssue">
+		<view class="weui-cell_input">
+			<input class="weui-input" bindblur="outplaceholders" bindfocus="placeholders" name='phone' type="number" bindinput="getInput" placeholder-class="place-holder" placeholder="{{placeholder}}" />
+		</view>
+		<view class="weui-cell_input">
+			<view style="width:200rpx;">
+				<input class="weui-input-code" bindblur="outplaceholdercode" bindfocus="placeholdercode" name='code' type="number" bindinput="getInputcode" placeholder-class="place-holder" placeholder="{{placeholdercode}}" />
+			</view>
+			<view>
+				<button style="width:300rpx" class="weui-button" bindtap="getCaptcha" :disabled="frozen">
+					{{captchaStatusText}}
+				</button>
+			</view>
+		</view>
+		<view class="weui-cell_input">
+			<input class="weui-input" bindblur="outplaceholderpwd" bindfocus="placeholderpwd" name='password' bindinput="getInputpass" type="password" placeholder-class="place-holder" placeholder="{{placeholderpwd}}" />
+		</view>
+		<view class="weui-cell_input">
+			<input class="weui-input" bindblur="outplaceholderrepwd" bindfocus="placeholderrepwd" name='checkPassword' bindinput="getInputrepass" type="password" placeholder-class="place-holder" placeholder="{{placeholderrepwd}}" />
+		</view>
+		<button class='login' form-type="submit">
+			修 改 密 码
+		</button>
+	</form>
+</view>
+<i-toast id="toast" />
+<view hidden="{{hiddenns}}">
+	<i-icon class="success-fill" type="success_fill" color="#00b26a" size="70" />
+	<view class="success-nav">密码修改成功，请重新登录</view>
+	<view class="success-foot">欢迎回来</view>
+
+	<button class='login' bindtap="newLogin">
+		重新登录
+	</button>
+
+</view>

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "i-icon": "../../dist/icon/index",
+    "i-input": "../../dist/input/index",
+    "i-button": "../../dist/button/index"
+  },
+  "navigationBarTitleText": "电脑编辑简历"
+}

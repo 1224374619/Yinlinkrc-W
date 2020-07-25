@@ -1,0 +1,92 @@
+<view style="font-size:28rpx">
+	<!-- 遮罩层 -->
+	<view class="cover_screen" bindtap="hidecityModal" wx:if="{{showModalStatus}}"></view>
+	<!-- 开始时间 弹窗 -->
+	<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatusBegin}}">
+		<view class="container">
+			<view style="display: flex;flex-direction: row;justify-content: space-between">
+				<view bindtap="hidecityModalOut">取消</view>
+				<view bindtap="hidecityModal">确定</view>
+			</view>
+			<view class="box">
+				<picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+					<picker-view-column>
+						<view wx:for="{{years}}" wx:key="{{years}}" style="line-height: 50px; text-align: center;">{{item}}年</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view wx:for="{{months}}" wx:key="{{months}}" style="line-height: 50px; text-align: center;">{{item}}月</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view wx:for="{{days}}" wx:key="{{days}}" style="line-height: 50px; text-align: center;">{{item}}日</view>
+					</picker-view-column>
+				</picker-view>
+			</view>
+		</view>
+	</view>
+	<!-- 结束时间 弹窗 -->
+	<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatusEnd}}">
+		<view class="container">
+			<view style="display: flex;flex-direction: row;justify-content: space-between">
+				<view bindtap="hidecityModalOut">取消</view>
+				<view bindtap="hidecityModalEnd">确定</view>
+			</view>
+			<view class="box">
+				<picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChangeEnd">
+					<picker-view-column>
+						<view wx:for="{{years}}" wx:key="{{years}}" style="line-height: 50px; text-align: center;">{{item}}年</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view wx:for="{{months}}" wx:key="{{months}}" style="line-height: 50px; text-align: center;">{{item}}月</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view wx:for="{{days}}" wx:key="{{days}}" style="line-height: 50px; text-align: center;">{{item}}日</view>
+					</picker-view-column>
+				</picker-view>
+			</view>
+		</view>
+	</view>
+	<form bindsubmit="submitIssue">
+		<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
+			<view>项目名称</view>
+			<view><input type="text" class="weui-input" name='project' bindinput="project" value="{{project}}" placeholder-class="nickname_placeholder" placeholder="" /></view>
+		</view>
+		<!-- <view class="line"></view>
+  <view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx"> 
+		<view>公司名称</view>
+    <view><input type="text" class="weui-input" placeholder-style="text-align: center;" placeholder="" /></view>
+	</view> -->
+		<view class="line"></view>
+		<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx" bindtap="showcityModal">
+			<view>项目开始时间</view>
+			<view class="picker">
+				<view style="display:flex;flex-direction:row;">
+					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='begindate' value='{{begindate}}' />
+					<i-icon type="enter" />
+				</view>
+			</view>
+		</view>
+		<view class="line"></view>
+		<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx" bindtap="showcityModals">
+			<view>项目结束时间</view>
+			<view class="picker">
+				<view style="display:flex;flex-direction:row;">
+					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='enddate' value='{{enddate}}' />
+					<i-icon type="enter" />
+				</view>
+			</view>
+		</view>
+		<view class="line"></view>
+		<view style="display:flex;flex-direction:column;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
+			<view>个人职责</view>
+			<view><textarea style="margin:30rpx 0 0 0;width:100%" class="weui-input" name='duty' bindinput="duty" value="{{duty}}" placeholder-class="nickname_placeholder" auto-height = false maxlength="-1" placeholder="" /></view>
+		</view>
+		<view class="line"></view>
+		<view style="display:flex;flex-direction:column;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
+			<view>项目介绍</view>
+			<view><textarea style="margin:30rpx 0 0 0;width:100%" class="weui-input" name='description' bindinput="description" value="{{description}}" auto-height = false maxlength="-1" placeholder-class="nickname_placeholder" placeholder="" /></view>
+		</view>
+		<view class="line"></view>
+		<button form-type="submit" class="button">保存</button>
+		<button bindtap="delete" class="buttons">删除</button>
+	</form>
+</view>
