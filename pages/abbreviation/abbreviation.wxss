@@ -56,10 +56,10 @@
 }
 .weui-button{
   height: 80rpx;
-  color: #FFF;
+  color: #ffffff;
   font-size: 28rpx;
   background-color: #327CF3;
-  border-radius: 40rpx;
+  /* border-radius: 40rpx; */
   line-height: 80rpx;
   margin: 0 0 0 30rpx
 }

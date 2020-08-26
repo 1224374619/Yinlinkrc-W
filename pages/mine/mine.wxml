@@ -11,7 +11,7 @@
           <view wx:if='{{baseList}}'> 
             <view class='name-text'>{{baseList.fullName}}</view>
             <view class='infor-text'>
-              <view>{{CodeToTag.CodeToTag([baseList.province,baseList.county],cityList)[1]}}</view>
+              <view>{{baseList.district}}</view>
               <view style="color:#e1e1e1">|</view>
               <view>工作{{baseList.workAge}}年</view>
               <view style="color:#e1e1e1">|</view>

@@ -78,7 +78,7 @@
 		<view class="line"></view>
 		<view style="display:flex;flex-direction:column;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
 			<view>工作描述</view>
-			<view><textarea style="width:100%;margin:30rpx 0 0 0" class="weui-input" name='description' bindinput="description" value="{{description}}" auto-height = false maxlength="-1" placeholder-class="nickname_placeholder" placeholder="" /></view>
+			<view><textarea style="width:100%;margin:30rpx 0 0 0"  style="text-align:left" name='description' bindinput="description" value="{{description}}" auto-height = false maxlength="-1" placeholder-class="nickname_placeholder" placeholder="" /></view>
 		</view>
 		<view class="line"></view>
 		<button form-type="submit" class="button">保存</button>

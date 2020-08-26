@@ -80,7 +80,7 @@
 			<view>工作城市</view>
 			<view class="picker">
 				<view style="display:flex;flex-direction:row;">
-					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='city' value='{{cityTag}}' />
+					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='city' value='{{districtTag}}' />
 					<i-icon type="enter" />
 				</view>
 			</view>

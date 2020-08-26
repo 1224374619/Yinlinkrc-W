@@ -1,6 +1,7 @@
 // component/skill/skill.js
 const app = getApp()
 import WxValidate from '../../utils/WxValidate.js'
+const timeUtil = require('../../utils/timeUtil.js');
 Page({
   /**
    * 页面的初始数据
@@ -80,14 +81,14 @@ Page({
   keep: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}/skills/${this.data.skillList.id}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/skill/${this.data.skillList.id}`, // 拼接接口地址(前面为公共部分)
       method: 'put',
       header: {
         'content-type': 'application/json',
         'Auth-Token':app.globalData.token
       },
       data: {
-        level: that.data.level,
+        level: timeUtil.levels(parseInt(that.data.level)),
         skill: that.data.skill,
         file: null
       },
@@ -106,7 +107,7 @@ Page({
   delete: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}/skills/${this.data.skillList.id}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/skill/${this.data.skillList.id}`, // 拼接接口地址(前面为公共部分)
       method: 'delete',
       header: {
         'content-type': 'application/json',
@@ -114,7 +115,6 @@ Page({
       },
       success(res) {
         if (app.globalData.token) {
-          console.log(res)
           wx.navigateBack({
             delta: 1, //返回上一个页面
           })
@@ -133,7 +133,7 @@ Page({
     console.log(skill)
     this.setData({
       skillList: skill,
-      level: skill.level,
+      level: parseInt(timeUtil.level(skill.level)),
       skill: skill.skill,
     });
   },

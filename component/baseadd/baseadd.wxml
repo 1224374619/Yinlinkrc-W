@@ -6,7 +6,7 @@
 	<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatusCity}}">
 		<view class="container">
 			<view style="display: flex;flex-direction: row;justify-content: space-between">
-				<view bindtap="hidecityModal">取消</view>
+				<view bindtap="hidecityModales">取消</view>
 				<view bindtap="hidecityModal">确定</view>
 			</view>
 			<view class="box">
@@ -16,6 +16,9 @@
 					</picker-view-column>
 					<picker-view-column>
 						<view style="text-align:center" wx:for="{{citys}}">{{item}}</view>
+					</picker-view-column>
+						<picker-view-column>
+						<view style="text-align:center;" wx:for="{{districts}}">{{item}}</view>
 					</picker-view-column>
 				</picker-view>
 			</view>
@@ -103,7 +106,7 @@
 			<view>城市</view>
 			<view class="picker">
 				<view wx:if='{{cityTag}}' style="display:flex;flex-direction:row;">
-					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='city' value='{{cityTag}}' />
+					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='city' value='{{districtTag}}' />
 					<i-icon type="enter" />
 				</view>
 				<view wx:else>请选择
@@ -192,7 +195,7 @@
 		<view class="line"></view>
 		<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
 			<view>海外工作年限</view>
-			<picker bindchange="bindPickerChangeoversearAge" name='oversearAge' value="{{indexoversearAge}}" range="{{arrayoversearAge}}">
+			<picker bindchange="bindPickerChangeoversearAge" name='overseasAge' value="{{indexoversearAge}}" range="{{arrayoversearAge}}">
 				<view class="picker">
 					<view>{{arrayoversearAge[indexoversearAge]}}
 						<i-icon type="enter" />

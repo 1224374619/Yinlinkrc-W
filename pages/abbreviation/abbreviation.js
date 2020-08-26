@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+
     hiddenn: false,
     hiddenns: true,
     frozen: false,
@@ -154,33 +155,6 @@ Page({
   getInputrepass: function (e) {
     this.data.getInputrepass = e.detail.value;
   },
-  // //验证码请求
-  // vcode: function () {
-  //   let that = this;
-  //   wx.request({
-  //     url: app.config.socketHost + '/account/phone/vcode', // 拼接接口地址(前面为公共部分)
-  //     method: 'post',
-  //     data: {
-  //       phone: that.data.getInput
-  //     },
-  //     header: {
-  //       'content-type': 'application/json'
-  //     },
-  //     success(res) {
-  //       if (res) {
-  //         console.log('发送成功')
-  //         // let newsList = res.data.data
-  //         // that.setData({ //通过setData来修改
-  //         //   positionList: newsList
-  //         // });
-  //         // // 开始获取数据 eg: textBox(获取文字内容)
-  //         // textBox : res.data.data.list.basic.brand_story  // 根据network查看请求到的接口的结构获取相对应的数据
-  //       } else {
-  //         console.log('发送失败')
-  //       }
-  //     }
-  //   })
-  // },
   //重置密码
   repassword: function () {
     let that = this;
@@ -197,7 +171,7 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
-        if (res.data.code === 200) {
+        if (res.data.code === "200") {
           $Toast({
             content: res.data.message,
             type: 'success'
@@ -220,6 +194,30 @@ Page({
       }
     })
   },
+
+  // // 获取验证码
+  // sendCode: function () {
+  //   let that = this;
+  //   // 60秒后重新获取验证码
+  //   var inter = setInterval(function () {
+  //     this.setData({
+  //       smsFlag: true,
+  //       sendColor: '#cccccc',
+  //       sendTime: that.data.snsMsgWait + 's后重发',
+  //       snsMsgWait: that.data.snsMsgWait - 1
+  //     });
+  //     if (that.data.snsMsgWait < 0) {
+  //       clearInterval(inter)
+  //       that.setData({
+  //         sendColor: '#363636',
+  //         sendTime: '获取验证码',
+  //         snsMsgWait: 60,
+  //         smsFlag: false
+  //       });
+  //     }
+  //   }.bind(that), 1000);
+  // },
+
   getCaptcha: function () {
     let that = this;
     const captchaLabel = '获取验证码';
@@ -238,7 +236,7 @@ Page({
           'content-type': 'application/json'
         },
         success(res) {
-          if (res.data.code === 400) {
+          if (res.data.code === '3501') {
             $Toast({
               content: res.data.message,
               type: 'warning'
@@ -246,15 +244,18 @@ Page({
           } else {
             const handler = setInterval(() => {
               that.setData({
+                smsFlag: true,
                 captchaStatusText: `${captchaLabel}(${--that.data.counter}s)`,
               })
               // this.data.captchaStatusText = `${captchaLabel}(${--this.data.counter}s)`;
-              if (that.data.counter === 0) {
+              if (that.data.counter < 0) {
                 clearInterval(handler);
                 that.setData({
                   counter: countNumber,
                   captchaStatusText: captchaLabel,
-                  frozen: false
+                  frozen: false,
+                  smsFlag: false,
+                  sendColor: '#327CF3',
                 })
               }
             }, 1000);

@@ -24,33 +24,33 @@ App({
   getInfo() {
     var that = this;
     wx.request({
-      // url: 'http://192.168.1.114:8081/consumer-core/positions/search', // 拼接接口地址(前面为公共部分)
-      url: 'https://www.yinlinkrc.com/api/v1/consumer-user/searched/position', // 拼接接口地址(前面为公共部分)
+      // url: 'http://192.168.1.108:8081/consumer-core/position/search', // 拼接接口地址(前面为公共部分)
+      url: 'https://www.yinlinkrc.com/api/v2/consumer-core/position/search', // 拼接接口地址(前面为公共部分)
       method: 'post',
       header: {
         'content-type': 'application/json',
-        'Auth-Token': this.globalData.token
       },
       data: {
         addresses: null,
         degreeMin: null,
         industries: null,
+        industryCodes: null,
         isGraduate: true,
         jobType: null,
-        keyword: null,
-        pageNum: 1,
+        keywords: null,
         natures: null,
-        pageSize: 10,
+        pageNum: 1,
+        pageSize: 100,
+        positionCatalog: null,
         publishedInterval: null,
+        publishedTime: null,
         salaryMax: null,
         salaryMin: null,
         size: null,
         sortBy: null,
         sortOrder: null,
         workAgeMax: null,
-        workAgeMin: null,
-        positionCatalog: null,
-        industryCodes: null
+        workAgeMin: null
       },
       success(res) {
         var newsList = res.data.data.list
@@ -61,57 +61,7 @@ App({
   },
   onShow: function (options) {
     this.getInfo()
-    // console.log(options,'111wwwwqq11')
-    // if (options.scene == 1007) {
-    //   // 通过单人聊天会话分享进入
-
-    // }
-    // if (options.scene == 1008) {
-    //   // 通过群聊会话分享进入
-    // }
-    // if (options.scene == 1001) {
-    //   // 通过发现栏小程序进入
-    // }
   },
-  // brief: function () {
-  //   let that = this;
-  //   wx.request({
-  //     url: 'https://www.yinlinkrc.com/api/v1/consumer-app/resume/brief', // 拼接接口地址(前面为公共部分)
-  //     method: 'get',
-  //     header: {
-  //       'content-type': 'application/json',
-  //       'Auth-Token': that.globalData.systemInfo === 'devtools' ? that.globalData.tokens : that.globalData.token
-  //     },
-  //     success(res) {
-  //       if (that.globalData.token || that.globalData.tokens) {
-  //         let defaultResumeId = res.data.data.defaultResumeId
-  //         that.globalData.resumeId = defaultResumeId
-  //       } else {
-  //         console.log('没有数据')
-  //       }
-  //     }
-  //   })
-  // },
-  // getUserData: function (cb) {
-  //   wx.getSetting({
-  //     success: res => {
-  //       if (res.authSetting['scope.userInfo']) {
-  //         // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-  //         wx.getUserInfo({
-  //           success: res => {
-  //             // 可以将 res 发送给后台解码出 unionId
-  //             this.globalData.userInfo = res.userInfo
-  //             // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-  //             // 所以此处加入 callback 以防止这种情况
-  //             if (this.userInfoReadyCallback) {
-  //               this.userInfoReadyCallback(res)
-  //             }
-  //           }
-  //         })
-  //       }
-  //     }
-  //   })
-  // },
   globalData: {
     userInfo: {},
     token: '',

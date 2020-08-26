@@ -71,9 +71,8 @@ Page({
           let resumeList = res.data.data
           let defaultResumeId = res.data.data.defaultResumeId
           app.globalData.resumeId = defaultResumeId
-          wx.setStorageSync('2', res.data.data.avatarUrl)
+          wx.setStorageSync('2', res.data.data.base.avatarUrl)
           var value = wx.getStorageSync('2')
-          console.log(value)
           if (value) {
             that.setData({
               avatarUrl: value
@@ -283,7 +282,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    
     if (app.globalData.token) {
       this.setData({
         logout: true
@@ -313,12 +312,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.brief()
-    wx.hideHomeButton()
-    console.log(app.globalData.resumeId)
     if (app.globalData.resumeId === 0) {
       this.initialize()
+      this.brief()
+    }else {
+      this.brief()
     }
+    wx.hideHomeButton()
   },
 
   /**

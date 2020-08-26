@@ -25,7 +25,8 @@
 		<view class="content" bindtap="position" data-id='{{companyId}}' data-positionid='{{item.id}}'>
 			<view>
 				<view class="position">{{item.positionName}}</view>
-				<view class="company">{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | 应届 | {{qualifications.qualifications(item.degreeMin)}}</view>
+				<view class="company" wx:if='{{item.isGraduate}}'>{{item.workAddress.city}} | 应届 | {{item.degreeMin}}</view>
+				<view class="company" wx:else>{{item.workAddress.city}} | 非应届 | {{item.degreeMin}}</view>
 			</view>
 			<view style="margin:0 40rpx 0 0">
 				<view class="pay">{{item.salaryMin}}k-{{item.salaryMax}}k</view>

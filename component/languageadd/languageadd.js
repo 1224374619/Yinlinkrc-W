@@ -1,6 +1,7 @@
 // component/languageadd/languageadd.js
 const app = getApp()
 import WxValidate from '../../utils/WxValidate.js'
+const timeUtil = require('../../utils/timeUtil.js');
 Page({
   /**
    * 页面的初始数据
@@ -11,19 +12,19 @@ Page({
     language: '',
     array: ['一般', '良好', '熟练', '精通'],
     objectArray: [{
-        id: 0,
+        id: 'NORMAL',
         name: '一般'
       },
       {
-        id: 1,
+        id: 'GOOD',
         name: '良好'
       },
       {
-        id: 2,
+        id: 'PROFICIENT',
         name: '熟练'
       },
       {
-        id: 3,
+        id: 'MASTER ',
         name: '精通'
       },
     ],
@@ -92,20 +93,20 @@ Page({
   keep: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}/languages`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/language`, // 拼接接口地址(前面为公共部分)
       method: 'post',
       header: {
         'content-type': 'application/json',
         'Auth-Token':app.globalData.token
       },
       data: {
-        language: that.data.language,
         listenAndSpeak: that.data.listenAndSpeak,
         readAndWrite: that.data.readAndWrite,
+        language: that.data.language,
       },
       success(res) {
         if (app.globalData.token) {
-          if(res.data.code === 201) {
+          if(res.statusCode === 200) {
             wx.navigateBack({
               delta: 1, //返回上一个页面
             })

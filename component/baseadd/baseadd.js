@@ -3,12 +3,13 @@ const time = require("../../utils/util.js");
 const cityData = require('../../utils/city.js');
 const app = getApp()
 import WxValidate from '../../utils/WxValidate.js'
+const timeUtil = require('../../utils/timeUtil.js');
 
 const date = new Date()
 const years = []
 const months = []
 const days = []
-for (let i = 1990; i <= date.getFullYear(); i++) {
+for (let i = 1960; i <= date.getFullYear(); i++) {
   years.push(i)
 }
 for (let i = 1; i <= 12; i++) {
@@ -35,18 +36,21 @@ Page({
     citysData: cityData.city,
     provinces: [],
     citys: [],
+    districts: [],
     value: [0, 0, 0],
+    provinceTag: '',
+    cityTag: '',
+    districtTag: '',
     showModalStatus: false,
     showModalStatusCity: false,
-    cityTag: '',
     cityCode: '',
+    districtCode: '',
     provinceCode: '',
 
 
     end: time.formatDate(new Date()),
     base: '',
     region: [],
-    city: '',
     customItem: '',
     province: '',
     phone: '',
@@ -387,28 +391,38 @@ Page({
 
   //城市
   initData: function () {
+    var cities = this.data.citysData
     var provinces = [];
     var citys = [];
+    var districts = [];
+
+    var provincesObj = {};
+    var citysObj = {};
 
     this.data.citysData.forEach(function (province, i) {
       console.log(i)
       provinces.push(province.tag);
-      if (i === 0) {
-        citys.push(province.children[i].tag);
-      }
     });
-
+    provincesObj = cities[0];
+    provincesObj.children.forEach(function (v) {
+      citys.push(v.tag);
+    });
+    citysObj = provincesObj.children[0];
+    citysObj.children.forEach(function (v) {
+      districts.push(v.tag);
+    });
     this.setData({
       provinces: provinces,
       citys: citys,
+      districts: districts
     });
   },
   bindChange: function (e) {
-    console.log(e)
     var citysData = this.data.citysData;
     var value = this.data.value;
     var current_value = e.detail.value;
     var citys = [];
+    var districts = [];
 
     var provinceObj = {};
     var cityObj = {};
@@ -420,16 +434,17 @@ Page({
     this.setData({
       citys: citys
     });
-    console.log(value[0], current_value[0])
     if (value[0] != current_value[0]) {
       // 滑动省份
       cityObj = provinceObj.children[0];
-      console.log(cityObj)
+      cityObj.children.forEach(function (v) {
+        districts.push(v.tag);
+      });
       this.setData({
-        // areas: cityObj.areas,
+        districts: districts,
+        provinceTag: provinceObj.tag,
         value: [current_value[0], 0, 0]
       });
-
     } else if (value[0] === current_value[0] && value[1] !== current_value[1]) {
       // 滑动城市
       if (current_value[1] >= provinceObj.children.length) {
@@ -437,8 +452,21 @@ Page({
         return;
       }
       cityObj = provinceObj.children[current_value[1]];
+      cityObj.children.forEach(function (v) {
+        districts.push(v.tag);
+      });
       this.setData({
+        cityTag: cityObj.tag,
+        districts: districts,
         value: [current_value[0], current_value[1], 0]
+      });
+    } else {
+      // 滑动区县
+      cityObj = provinceObj.children[current_value[1]];
+      this.setData({
+        value: current_value,
+        districtTag: cityObj.children[this.data.value[2]].tag,
+        districtCode: cityObj.children[this.data.value[2]].code,
       });
     }
     if (cityObj.code === null) {
@@ -449,10 +477,12 @@ Page({
       this.setData({
         cityTag: cityObj.tag,
         cityCode: cityObj.code,
-        provinceCode: provinceObj.code
+        provinceTag: provinceObj.tag,
+        provinceCode: provinceObj.code,
+        districtTag: cityObj.children[this.data.value[2]].tag,
+        districtCode: cityObj.children[this.data.value[2]].code,
       });
     }
-
   },
   showcityModal() {
     // 显示遮罩层
@@ -488,6 +518,7 @@ Page({
   },
   //city隐藏
   hidecityModal() {
+    let that = this
     // 隐藏遮罩层
     var animation = wx.createAnimation({
       duration: 200,
@@ -498,7 +529,34 @@ Page({
     animation.translateY(300).step()
     this.setData({
       animationData: animation.export(),
-      city: this.data.name
+      provinceTag: that.data.provinceTag?that.data.provinceTag:"北京市",
+      provinceCode: that.data.provinceCode?that.data.provinceCode:110000,
+      cityTag: that.data.cityTag?that.data.cityTag:"北京市",
+      cityCode: that.data.cityCode?that.data.cityCode:110100,
+      districtTag: that.data.districtTag?that.data.districtTag:"东城区",
+      districtCode: that.data.districtCode?that.data.districtCode:110101,
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false,
+        showModalStatusCity: false,
+      })
+    }.bind(this), 200)
+  },
+  //city隐藏
+  hidecityModales() {
+    // 隐藏遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "ease",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
     })
     setTimeout(function () {
       animation.translateY(0).step()
@@ -525,7 +583,7 @@ Page({
       city: {
         required: true
       },
-      born: {
+      bornDate: {
         required: true
       },
       phone: {
@@ -695,16 +753,23 @@ Page({
           'Auth-Token': app.globalData.token
         },
         data: {
-          file: null,
+          avatar: null,
           overseasAge: that.data.indexoversearAge,
           workYear: til,
-          politicalStatus: that.data.indexcata,
+          politicalStatus: timeUtil.politicalStatus(parseInt(that.data.indexcata)),
+          politicalStatusCode: that.data.indexcata,
           birthday: till,
-          county: that.data.cityCode,
+          province: that.data.provinceTag,
+          provinceCode: that.data.provinceCode,
+          city: that.data.cityTag,
+          cityCode: that.data.cityCode,
+          district: that.data.districtTag,
+          districtCode: that.data.districtCode,
           fullName: that.data.fullName,
-          sex: that.data.indexsex,
-          province: that.data.provinceCode,
-          degree: that.data.indexagree,
+          sex: timeUtil.sex(parseInt(that.data.indexsex)),
+          sexCode: that.data.indexsex,
+          degree: timeUtil.qualifications(parseInt(that.data.indexagree)),
+          degreeCode: that.data.indexagree,
           email: that.data.email,
           phone: that.data.phone,
           isGraduate: true,

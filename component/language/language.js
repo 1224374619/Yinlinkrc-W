@@ -2,13 +2,14 @@
 const time = require("../../utils/util.js");
 const app = getApp()
 import WxValidate from '../../utils/WxValidate.js'
+const timeUtil = require('../../utils/timeUtil.js');
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    listenAndSpeak: 0,
-    readAndWrite: 0,
+    listenAndSpeak: '',
+    readAndWrite: '',
     languageList: '',
     language: '',
     array: ['一般', '良好', '熟练', '精通'],
@@ -25,7 +26,7 @@ Page({
         name: '熟练'
       },
       {
-        id: 3,
+        id: 3 ,
         name: '精通'
       },
     ],
@@ -94,20 +95,19 @@ Page({
   keep: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}/languages/${this.data.languageList.id}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/language/${this.data.languageList.id}`, // 拼接接口地址(前面为公共部分)
       method: 'put',
       header: {
         'content-type': 'application/json',
-        'Auth-Token':app.globalData.token
+        'Auth-Token': app.globalData.token
       },
       data: {
-        listenAndSpeak: that.data.listenAndSpeak,
-        readAndWrite: that.data.readAndWrite,
+        listenAndSpeak: timeUtil.levels(parseInt(that.data.listenAndSpeak)),
+        readAndWrite: timeUtil.levels(parseInt(that.data.readAndWrite)),
         language: that.data.language,
       },
       success(res) {
         if (app.globalData.token) {
-          console.log(res)
           wx.navigateBack({
             delta: 1, //返回上一个页面
           })
@@ -120,11 +120,11 @@ Page({
   delete: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}/languages/${this.data.languageList.id}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/language/${this.data.languageList.id}`, // 拼接接口地址(前面为公共部分)
       method: 'delete',
       header: {
         'content-type': 'application/json',
-        'Auth-Token':app.globalData.token
+        'Auth-Token': app.globalData.token
       },
       success(res) {
         if (app.globalData.token) {
@@ -144,12 +144,12 @@ Page({
   onLoad: function (options) {
     this.initValidate()
     let language = JSON.parse(options.language);
-    console.log(language)
+    console.log(timeUtil.level(language.listenAndSpeak))
     this.setData({
       languageList: language,
       language: language.language,
-      listenAndSpeak: language.listenAndSpeak,
-      readAndWrite: language.readAndWrite,
+      listenAndSpeak:parseInt(timeUtil.level(language.listenAndSpeak)),
+      readAndWrite:parseInt(timeUtil.level(language.readAndWrite)),
     });
   },
 

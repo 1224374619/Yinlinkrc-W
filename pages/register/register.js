@@ -148,15 +148,18 @@ Page({
           } else {
             const handler = setInterval(() => {
               that.setData({
+                smsFlag: true,
                 captchaStatusText: `${captchaLabel}(${--that.data.counter}s)`,
               })
               // this.data.captchaStatusText = `${captchaLabel}(${--this.data.counter}s)`;
-              if (that.data.counter === 0) {
+              if (that.data.counter < 0) {
                 clearInterval(handler);
                 that.setData({
                   counter: countNumber,
                   captchaStatusText: captchaLabel,
-                  frozen: false
+                  frozen: false,
+                  smsFlag: false,
+                  sendColor: '#327CF3',
                 })
               }
             }, 1000);
@@ -186,7 +189,7 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
-        if (res.data.code === 200) {
+        if (res.data.code === "200") {
           $Toast({
             content: res.data.message,
             type: 'success'

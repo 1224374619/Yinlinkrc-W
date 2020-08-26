@@ -1,6 +1,7 @@
 // pages/position/position.js
 const app = getApp()
 var cityList = require('../../utils/city.js');
+const timeUtil = require('../../utils/timeUtil.js');
 Page({
 
   /**
@@ -37,6 +38,7 @@ Page({
     workAgeMax: '',
     salary: '月薪范围',
     cityName: [],
+    city:'',
 
     checkValue: '',
     checkValueWork: '',
@@ -222,27 +224,27 @@ Page({
       },
       {
         checked: false, //是否选中
-        id: 0, //部门能id
+        id: "国有企业", //部门能id
         name: "国有企业",
       },
       {
         checked: false, //是否选中
-        id: 1, //部门能id
+        id: "民营企业", //部门能id
         name: "民营企业",
       },
       {
         checked: false, //是否选中
-        id: 2, //部门能id
+        id: "合资企业", //部门能id
         name: "合资企业",
       },
       {
         checked: false, //是否选中
-        id: 3, //部门能id
+        id: "外资企业", //部门能id
         name: "外资企业",
       },
       {
         checked: false, //是否选中
-        id: 4, //部门能id
+        id: "事业单位", //部门能id
         name: "事业单位",
       },
     ],
@@ -258,22 +260,22 @@ Page({
       },
       {
         checked: false, //是否选中
-        id: 1, //部门能id
+        id: 3, //部门能id
         name: "三天以内",
       },
       {
         checked: false, //是否选中
-        id: 2, //部门能id
+        id: 5, //部门能id
         name: "五天以内",
       },
       {
         checked: false, //是否选中
-        id: 3, //部门能id
+        id: 7, //部门能id
         name: "七天以内",
       },
       {
         checked: false, //是否选中
-        id: 4, //部门能id
+        id: 15, //部门能id
         name: "十五天以内",
       },
     ],
@@ -365,45 +367,49 @@ Page({
     }
   },
   bindRegionChange: function (e) {
-    let arr = []
-    console.log(e.detail.code[1])
-    if (e.detail.code[0] === "110000" || e.detail.code[0] === "120000" || e.detail.code[0] === "310000" || e.detail.code[0] === "500000" || e.detail.code[0] === "810000" || e.detail.code[0] === "820000") {
-      if (e.detail.code[2] === undefined) {
-        this.setData({
-          // region: [],
-          province: e.detail.code[0],
-          city: e.detail.value[0],
-          cityName: [],
-        })
-        console.log(e.detail.value[0], e.detail.value[1], e.detail.value[2])
-      } else {
-        arr.push(e.detail.code[2])
-        this.setData({
-          region: arr,
-          province: e.detail.code[0],
-          city: e.detail.value[2],
-          cityName: e.detail.value,
-        })
-        console.log(e.detail.value[0], e.detail.value[1], e.detail.value[2])
-      }
-    } else {
-      if (e.detail.code[1] === undefined) {
-        this.setData({
-          // region: [],
-          province: e.detail.code[0],
-          city: e.detail.value[0],
-          cityName: []
-        })
-      } else {
-        arr.push(e.detail.code[1])
-        this.setData({
-          region: arr,
-          province: e.detail.code[0],
-          city: e.detail.value[1],
-          cityName: e.detail.value,
-        })
-      }
-    }
+    this.setData({
+      cityName: e.detail.value,
+      city: e.detail.value[0],
+    })
+    // if (e.detail.value[0] === '全部') {
+
+    // }
+    // if (e.detail.code[0] === "110000" || e.detail.code[0] === "120000" || e.detail.code[0] === "310000" || e.detail.code[0] === "500000" || e.detail.code[0] === "810000" || e.detail.code[0] === "820000") {
+    //   if (e.detail.code[2] === undefined) {
+    //     this.setData({
+    //       // region: [],
+    //       province: e.detail.code[0],
+    //       city: e.detail.value[0],
+    //       cityName: [],
+    //     })
+    //   } else {
+    //     arr.push(e.detail.code[2])
+    //     this.setData({
+    //       region: arr,
+    //       province: e.detail.code[0],
+    //       city: e.detail.value[2],
+    //       cityName: e.detail.value,
+    //     })
+    //     console.log(e.detail.value[0], e.detail.value[1], e.detail.value[2])
+    //   }
+    // } else {
+    //   if (e.detail.code[1] === undefined) {
+    //     this.setData({
+    //       // region: [],
+    //       province: e.detail.code[0],
+    //       city: e.detail.value[0],
+    //       cityName: []
+    //     })
+    //   } else {
+    //     arr.push(e.detail.code[1])
+    //     this.setData({
+    //       region: arr,
+    //       province: e.detail.code[0],
+    //       city: e.detail.value[1],
+    //       cityName: e.detail.value,
+    //     })
+    //   }
+    // }
     this.confirm()
   },
   checkbox: function (e) {
@@ -490,6 +496,7 @@ Page({
   },
   checkboxQuality: function (e) {
     var checkValue = e.detail.value;
+    console.log(e)
     this.setData({
       checkValueQua: checkValue
     });
@@ -751,28 +758,29 @@ Page({
 
     var that = this;
     wx.request({
-      url: app.config.uploadHost + '/positions/search', // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + '/position/search', // 拼接接口地址(前面为公共部分)
       method: 'post',
       header: {
         'content-type': 'application/json',
-        'Auth-Token': app.globalData.token
       },
       data: {
-        addresses: [{
-          city: that.data.cityName[1]?that.data.cityName[1]:null,
-          district: that.data.cityName[2]?that.data.cityName[2]:null,
-          province: that.data.cityName[0]?that.data.cityName[0]:null
+        addresses: that.data.cityName[0] === '全部'||that.data.cityName[0] === undefined?null:[{
+          city: that.data.cityName[1] === '全部'?null:that.data.cityName[1],
+          district: that.data.cityName[2] === '全部'?null:that.data.cityName[2],
+          province: that.data.cityName[0] === '全部'?null:that.data.cityName[0]
         }],
-        degreeMin: that.data.checkValueDe,
+        degreeMin: that.data.checkValueDe? timeUtil.qualifications(Number(that.data.checkValueDe)):null,
         industries: null,
-        isGraduate: null,
+        isGraduate: true,
         industryCodes: null,
-        jobType: that.data.checkValueJob,
-        keyword: that.data.keyword,
+        jobType: that.data.checkValueJob? timeUtil.jobType(Number(that.data.checkValueJob)):null,
+        keywords: that.data.keyword?that.data.keyword:null,
         pageNum: 1,
         natures: that.data.checkValueQua.length === 0 ? null : that.data.checkValueQua,
         pageSize: 10,
         publishedInterval: that.data.checkValueTi,
+        publishedTime: null,
+        positionCatalog:null,
         salaryMax: that.data.salaryMax,
         salaryMin: that.data.salaryMin,
         size: that.data.checkValueSca,
@@ -780,7 +788,6 @@ Page({
         sortOrder: null,
         workAgeMax: that.data.workAgeMax,
         workAgeMin: that.data.workAgeMin,
-        positionCatalog: null
       },
       success(res) {
         var newsList = res.data.data.list
@@ -835,7 +842,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.id)
     this.setData({ //通过setData来修改
       // companyList: app.globalData.companyList.list,
       cityList: cityList.city,
@@ -899,7 +905,7 @@ Page({
     // })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: app.config.uploadHost + '/searched/position',
+      url: app.config.uploadHost + '/position/search',
       data: {
         counties: that.data.region.length === 0 ? null : that.data.region,
         degreeMin: that.data.checkValueDe,

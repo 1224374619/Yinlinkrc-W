@@ -39,6 +39,9 @@
 					<picker-view-column>
 						<view style="text-align:center" wx:for="{{citys}}">{{item}}</view>
 					</picker-view-column>
+					<picker-view-column>
+						<view style="text-align:center;" wx:for="{{districts}}">{{item}}</view>
+					</picker-view-column>
 				</picker-view>
 			</view>
 		</view>
@@ -67,7 +70,7 @@
 			<view>职位类型</view>
 			<view class="picker">
 				<view wx:if='{{PositionTag}}' style="display:flex;flex-direction:row;">
-					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='PositionTag'  value='{{PositionTag}}' />
+					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='PositionTag' value='{{PositionTag}}' />
 					<i-icon type="enter" />
 				</view>
 				<view wx:else>请选择
@@ -92,8 +95,8 @@
 		<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx" bindtap='showindustryModal'>
 			<view>企业行业</view>
 			<view class="picker">
-				<view wx:if='{{industryTag}}' style="display:flex;flex-direction:row;">
-					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='industry' value='{{industryTag}}' />
+				<view wx:if='{{industrySecondTag}}' style="display:flex;flex-direction:row;">
+					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='industry' value='{{industrySecondTag}}' />
 					<i-icon type="enter" />
 				</view>
 				<view wx:else>请选择

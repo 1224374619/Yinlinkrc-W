@@ -2,13 +2,14 @@
 const time = require("../../utils/util.js");
 const cityList = require('../../utils/city.js');
 import WxValidate from '../../utils/WxValidate.js'
+const timeUtil = require('../../utils/timeUtil.js');
 const app = getApp()
 
 const date = new Date()
 const years = []
 const months = []
 const days = []
-for (let i = 1990; i <= date.getFullYear(); i++) {
+for (let i = 1960; i <= date.getFullYear(); i++) {
   years.push(i)
 }
 for (let i = 1; i <= 12; i++) {
@@ -38,14 +39,21 @@ Page({
     citysData: cityList.city,
     provinces: [],
     citys: [],
+    districts: [],
     value: [0, 0, 0],
+    provinceTag: '',
+    cityTag: '',
+    districtTag: '',
     showModalStatus: false,
     showModalStatusCity: false,
+    cityCode: '',
+    districtCode: '',
+    provinceCode: '',
 
     avatarUrl: '',
     id: '',
     end: time.formatDate(new Date()),
-    base: '',
+    base: {},
     phone: '',
     email: '',
     fullName: '',
@@ -245,7 +253,31 @@ Page({
     }, 200)
   },
   //city隐藏
-  hidecityModals() {
+  hidecityModal() {
+    let that = this
+    // 隐藏遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "ease",
+      delay: 0
+    })
+    that.animation = animation
+    animation.translateY(300).step()
+    that.setData({
+      animationData: animation.export(),
+    })
+    console.log(that.data.districtTag)
+    setTimeout(function () {
+      animation.translateY(0).step()
+      that.setData({
+        animationData: animation.export(),
+        showModalStatus: false,
+        showModalStatusCity: false,
+      })
+    }.bind(that), 200)
+  },
+  //city隐藏
+  hidecityModales() {
     // 隐藏遮罩层
     var animation = wx.createAnimation({
       duration: 200,
@@ -256,16 +288,19 @@ Page({
     animation.translateY(300).step()
     this.setData({
       animationData: animation.export(),
-      begindate: this.data.begindateNew ? this.data.begindateNew : '2020-01-01',
+      provinceTag: that.data.provinceTag,
+      provinceCode: that.data.provinceCode,
+      cityTag: that.data.cityTag,
+      cityCode: that.data.cityCode,
+      districtTag: that.data.districtTag,
+      districtCode: that.data.districtCode,
     })
     setTimeout(function () {
       animation.translateY(0).step()
       this.setData({
         animationData: animation.export(),
         showModalStatus: false,
-        showModalStatusBegin: false,
-        showModalStatusEnd: false,
-        begindateNew: ''
+        showModalStatusCity: false,
       })
     }.bind(this), 200)
   },
@@ -291,6 +326,31 @@ Page({
         showModalStatusBegin: false,
         showModalStatusEnd: false,
         borndateNew: ''
+      })
+    }.bind(this), 200)
+  },
+  //city隐藏
+  hidecityModalEnds() {
+    // 隐藏遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "ease",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      begindate: this.data.begindateNew ? this.data.begindateNew : '2020-01-01'
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false,
+        showModalStatusBegin: false,
+        showModalStatusEnd: false,
+        begindateNew: ''
       })
     }.bind(this), 200)
   },
@@ -385,28 +445,38 @@ Page({
 
   //城市
   initData: function () {
+    var cities = this.data.citysData
     var provinces = [];
     var citys = [];
+    var districts = [];
+
+    var provincesObj = {};
+    var citysObj = {};
 
     this.data.citysData.forEach(function (province, i) {
       console.log(i)
       provinces.push(province.tag);
-      if (i === 0) {
-        citys.push(province.children[i].tag);
-      }
     });
-
+    provincesObj = cities[0];
+    provincesObj.children.forEach(function (v) {
+      citys.push(v.tag);
+    });
+    citysObj = provincesObj.children[0];
+    citysObj.children.forEach(function (v) {
+      districts.push(v.tag);
+    });
     this.setData({
       provinces: provinces,
       citys: citys,
+      districts: districts
     });
   },
   bindChange: function (e) {
-    console.log(e)
     var citysData = this.data.citysData;
     var value = this.data.value;
     var current_value = e.detail.value;
     var citys = [];
+    var districts = [];
 
     var provinceObj = {};
     var cityObj = {};
@@ -418,16 +488,17 @@ Page({
     this.setData({
       citys: citys
     });
-    console.log(value[0], current_value[0])
     if (value[0] != current_value[0]) {
       // 滑动省份
       cityObj = provinceObj.children[0];
-      console.log(cityObj)
+      cityObj.children.forEach(function (v) {
+        districts.push(v.tag);
+      });
       this.setData({
-        // areas: cityObj.areas,
+        districts: districts,
+        provinceTag: provinceObj.tag,
         value: [current_value[0], 0, 0]
       });
-
     } else if (value[0] === current_value[0] && value[1] !== current_value[1]) {
       // 滑动城市
       if (current_value[1] >= provinceObj.children.length) {
@@ -435,8 +506,21 @@ Page({
         return;
       }
       cityObj = provinceObj.children[current_value[1]];
+      cityObj.children.forEach(function (v) {
+        districts.push(v.tag);
+      });
       this.setData({
+        cityTag: cityObj.tag,
+        districts: districts,
         value: [current_value[0], current_value[1], 0]
+      });
+    } else {
+      // 滑动区县
+      cityObj = provinceObj.children[current_value[1]];
+      this.setData({
+        value: current_value,
+        districtTag: cityObj.children[this.data.value[2]].tag,
+        districtCode: cityObj.children[this.data.value[2]].code,
       });
     }
     if (cityObj.code === null) {
@@ -447,10 +531,12 @@ Page({
       this.setData({
         cityTag: cityObj.tag,
         cityCode: cityObj.code,
-        provinceCode: provinceObj.code
+        provinceTag: provinceObj.tag,
+        provinceCode: provinceObj.code,
+        districtTag: cityObj.children[this.data.value[2]].tag,
+        districtCode: cityObj.children[this.data.value[2]].code,
       });
     }
-
   },
   showcityModal() {
     // 显示遮罩层
@@ -484,31 +570,6 @@ Page({
       })
     }, 200)
   },
-  //city隐藏
-  hidecityModal() {
-    // 隐藏遮罩层
-    var animation = wx.createAnimation({
-      duration: 200,
-      timingFunction: "ease",
-      delay: 0
-    })
-    this.animation = animation
-    animation.translateY(300).step()
-    this.setData({
-      animationData: animation.export(),
-      city: this.data.name
-    })
-    setTimeout(function () {
-      animation.translateY(0).step()
-      this.setData({
-        animationData: animation.export(),
-        showModalStatus: false,
-        showModalStatusCity: false,
-        showModalStatusBegin: false,
-        showModalStatusEnd: false
-      })
-    }.bind(this), 200)
-  },
 
   // 拍摄或从相册选取上传
   uploadPhoto(e) {
@@ -519,7 +580,9 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        console.log(res)
         var tempFilePaths = res.tempFilePaths;
+        var tempFile = res.tempFiles;
         console.log('本地图片的路径:', tempFilePaths)
         // that.upload(that, tempFilePaths)
         that.setData({
@@ -530,10 +593,13 @@ Page({
           mask: true
         })
         wx.uploadFile({
-          url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/base/avatar`, // 拼接接口地址(前面为公共部分)
+          url: app.config.fileHost + '/files/upload', // 拼接接口地址(前面为公共部分)
           // url: 'https://www.yinlinkrc.com/api/v1/backend-manager/companies/import', // 拼接接口地址(前面为公共部分)
           filePath: tempFilePaths[0],
           name: 'file',
+          formData: {
+            label: "resume-avatar",
+          },
           header: {
             "Content-Type": "multipart/form-data",
             'Auth-Token': app.globalData.token
@@ -547,6 +613,7 @@ Page({
               })
               wx.hideLoading()
             } else {
+              wx.hideLoading()
               wx.showModal({
                 title: '提示',
                 content: '上传失败',
@@ -581,9 +648,9 @@ Page({
         required: true,
         tel: true
       },
-      or: {
-        required: true
-      },
+      // or: {
+      //   required: true
+      // },
       time: {
         required: true
       },
@@ -622,9 +689,9 @@ Page({
         required: '请选择生日',
         phone: '请填写正确的手机号'
       },
-      or: {
-        required: '请选择求职状态'
-      },
+      // or: {
+      //   required: '请选择求职状态'
+      // },
       time: {
         required: '请选择开始工作时间 '
       },
@@ -699,7 +766,7 @@ Page({
     })
   },
   bindPickerChangeagree: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    console.log('picker发送选择改变，携带值为', e)
     this.setData({
       indexagree: e.detail.value
     })
@@ -742,19 +809,26 @@ Page({
           'Auth-Token': app.globalData.token
         },
         data: {
-          file: that.data.id ? that.data.id : null,
+          avatar: that.data.id ? that.data.id : null,
           overseasAge: that.data.indexoversearAge,
           workYear: til,
-          politicalStatus: that.data.indexcata,
+          politicalStatus: timeUtil.politicalStatus(parseInt(that.data.indexcata)),
+          politicalStatusCode: that.data.indexcata,
           birthday: till,
-          county: that.data.cityCode,
+          province: that.data.provinceTag,
+          provinceCode: that.data.provinceCode,
+          city: that.data.cityTag,
+          cityCode: that.data.cityCode,
+          district: that.data.districtTag,
+          districtCode: that.data.districtCode,
           fullName: that.data.fullName,
-          sex: that.data.indexsex,
-          province: that.data.provinceCode,
-          degree: that.data.indexagree,
+          sex: timeUtil.sex(parseInt(that.data.indexsex)),
+          sexCode: that.data.indexsex,
+          degree: timeUtil.qualifications(parseInt(that.data.indexagree)),
+          degreeCode: that.data.indexagree,
           email: that.data.email,
           phone: that.data.phone,
-          isGraduate: true,
+          isGraduate: that.data.indexgraduate === '0'?true:false,
         },
         success(res) {
           if (app.globalData.token) {
@@ -763,7 +837,7 @@ Page({
               wx.navigateBack({
                 delta: 1, //返回上一个页面
               })
-              wx.setStorageSync('2', res.data.data.avatarUrl)
+              wx.setStorageSync('2', res.data.data.base.avatarUrl)
             } else {
               wx.showModal({
                 content: res.data.message
@@ -788,7 +862,7 @@ Page({
       success(res) {
         if (app.globalData.token) {
           that.setData({ //通过setData来修改
-            avatarUrl: res.data.data.avatarUrl,
+            avatarUrl: res.data.data.base.avatarUrl,
           });
         } else {
           console.log('没有数据')
@@ -817,18 +891,23 @@ Page({
     }
     this.setData({
       base: base,
-      indexsex: base.sex,
+      indexsex: base.sexCode,
       borndate: time.formatDate(base.birthday),
       begindate: time.formatDate(base.workYear),
-      indexcata: base.politicalStatus,
+      indexcata: base.politicalStatusCode,
       indexoversearAge: base.overseasAge,
-      indexagree: base.degree,
+      indexagree: base.degreeCode,
+      indexgraduate:base.isGraduate?'0':'1',
       phone: base.phone,
       fullName: base.fullName,
       email: base.email,
-      provinceCode: base.province,
-      cityCode: base.county,
-      cityTag: time.CodeToTag([base.province, base.county], cityList.city)[1]
+      provinceCode: base.provinceCode,
+      provinceTag: base.province,
+      cityCode: base.cityCode,
+      cityTag: base.city,
+      districtCode: base.districtCode,
+      districtTag: base.district,
+
     });
   },
 

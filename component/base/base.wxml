@@ -6,7 +6,7 @@
 	<view animation="{{animationData}}" class="buy_box" wx:if="{{showModalStatusCity}}">
 		<view class="container">
 			<view style="display: flex;flex-direction: row;justify-content: space-between">
-				<view bindtap="hidecityModal">取消</view>
+				<view bindtap="hidecityModales">取消</view>
 				<view bindtap="hidecityModal">确定</view>
 			</view>
 			<view class="box">
@@ -16,6 +16,9 @@
 					</picker-view-column>
 					<picker-view-column>
 						<view style="text-align:center" wx:for="{{citys}}">{{item}}</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view style="text-align:center;" wx:for="{{districts}}">{{item}}</view>
 					</picker-view-column>
 				</picker-view>
 			</view>
@@ -48,7 +51,7 @@
 		<view class="container">
 			<view style="display: flex;flex-direction: row;justify-content: space-between">
 				<view bindtap="hidecityModalOut">取消</view>
-				<view bindtap="hidecityModals">确定</view>
+				<view bindtap="hidecityModalEnds">确定</view>
 			</view>
 			<view class="box">
 				<picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{valueTime}}" bindchange="bindChangeTimeBegin">
@@ -69,11 +72,11 @@
 	<form bindsubmit="submitIssue">
 		<view style="display:flex;flex-direction:row;justify-content:space-between;margin:20rpx 40rpx 0 40rpx;">
 			<view style="line-height:30rpx;margin:30rpx 0 0 0">头像</view>
-			<view style="margin:10rpx 0 0 50rpx;width:550rpx;" bindtap="uploadPhoto" wx:if='{{avatarUrl == null}}'>
-				<image style="width:60rpx;height:60rpx;border-radius:30rpx;float:right" src="../../icons/3.png"></image>
+			<view style="margin:10rpx 0 0 50rpx;width:550rpx;" bindtap="uploadPhoto" wx:if='{{avatarUrl}}'>
+				<image style="width:60rpx;height:60rpx;border-radius:30rpx;float:right" src="{{avatarUrl}}"></image>
 			</view>
 			<view style="margin:10rpx 0 0 50rpx;width:550rpx;" bindtap="uploadPhoto" wx:else>
-				<image style="width:60rpx;height:60rpx;border-radius:30rpx;float:right" src="{{avatarUrl}}"></image>
+				<image style="width:60rpx;height:60rpx;border-radius:30rpx;float:right" src="../../icons/3.png" ></image>
 			</view>
 		</view>
 		<view class="line"></view>
@@ -108,7 +111,7 @@
 			<view>城市</view>
 			<view class="picker">
 				<view style="display:flex;flex-direction:row;">
-					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='city' value='{{cityTag}}' />
+					<input style="text-align:right;margin:0 10rpx 0 0" disabled="true" name='city' value='{{districtTag}}' />
 					<i-icon type="enter" />
 				</view>
 			</view>
@@ -129,7 +132,7 @@
 			<view><input type="text" class="weui-input" name='phone' value="{{phone}}" bindinput="phone" placeholder-class="nickname_placeholder" placeholder="" /></view>
 		</view>
 		<view class="line"></view>
-		<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
+		<!-- <view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
 			<view>求职状态</view>
 			<picker bindchange="bindPickerChangeor" name='or' value="{{indexor}}" range="{{arrayor}}">
 				<view class="picker">
@@ -138,8 +141,8 @@
 					</view>
 				</view>
 			</picker>
-		</view>
-		<view class="line"></view>
+		</view> -->
+		<!-- <view class="line"></view> -->
 		<view style="display:flex;flex-direction:row;justify-content:space-between;margin:30rpx 40rpx 0 40rpx" bindtap="showcityModals">
 			<view>工作开始时间</view>
 			<view class="picker">

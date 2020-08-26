@@ -26,7 +26,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 10300,
-        "tag": "销售行政/商务>>",
+        "tag": "销售行政/商务",
         "parent": 10000,
         "level": 2,
         "children": [{
@@ -87,7 +87,7 @@ var positionCatalog = [
       },
       {
         "code": 10400,
-        "tag": "客服/售前/售后技术支持>>",
+        "tag": "客服/售前/售后技术支持",
         "parent": 10000,
         "level": 2,
         "children": [{
@@ -154,7 +154,7 @@ var positionCatalog = [
       },
       {
         "code": 10500,
-        "tag": "市场>>",
+        "tag": "市场",
         "parent": 10000,
         "level": 2,
         "children": [{
@@ -329,7 +329,7 @@ var positionCatalog = [
       },
       {
         "code": 10600,
-        "tag": "公关/媒介>>",
+        "tag": "公关/媒介",
         "parent": 10000,
         "level": 2,
         "children": [{
@@ -384,7 +384,7 @@ var positionCatalog = [
       },
       {
         "code": 10700,
-        "tag": "广告/会展>>",
+        "tag": "广告/会展",
         "parent": 10000,
         "level": 2,
         "children": [{
@@ -487,7 +487,7 @@ var positionCatalog = [
       },
       {
         "code": 10100,
-        "tag": "销售业务>>",
+        "tag": "销售业务",
         "parent": 10000,
         "level": 2,
         "children": [{
@@ -572,7 +572,7 @@ var positionCatalog = [
       },
       {
         "code": 10200,
-        "tag": "销售管理>>",
+        "tag": "销售管理",
         "parent": 10000,
         "level": 2,
         "children": [{
@@ -676,7 +676,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 20100,
-        "tag": "财务/审计/税务>>",
+        "tag": "财务/审计/税务",
         "parent": 20000,
         "level": 2,
         "children": [{
@@ -815,7 +815,7 @@ var positionCatalog = [
       },
       {
         "code": 20200,
-        "tag": "人力资源>>",
+        "tag": "人力资源",
         "parent": 20000,
         "level": 2,
         "children": [{
@@ -924,7 +924,7 @@ var positionCatalog = [
       },
       {
         "code": 20300,
-        "tag": "行政/后勤/文秘>>",
+        "tag": "行政/后勤/文秘",
         "parent": 20000,
         "level": 2,
         "children": [{
@@ -992,7 +992,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 30100,
-        "tag": "项目管理/项目协调>>",
+        "tag": "项目管理/项目协调",
         "parent": 30000,
         "level": 2,
         "children": [{
@@ -1137,7 +1137,7 @@ var positionCatalog = [
       },
       {
         "code": 30200,
-        "tag": "质量管理/安全防护>>",
+        "tag": "质量管理/安全防护",
         "parent": 30000,
         "level": 2,
         "children": [{
@@ -1216,7 +1216,7 @@ var positionCatalog = [
       },
       {
         "code": 30300,
-        "tag": "高级管理>>",
+        "tag": "高级管理",
         "parent": 30000,
         "level": 2,
         "children": [{
@@ -1314,7 +1314,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 40100,
-        "tag": "软件/互联网开发/系统集成>>",
+        "tag": "软件/互联网开发/系统集成",
         "parent": 40000,
         "level": 2,
         "children": [{
@@ -1453,7 +1453,7 @@ var positionCatalog = [
       },
       {
         "code": 40200,
-        "tag": "硬件开发>>",
+        "tag": "硬件开发",
         "parent": 40000,
         "level": 2,
         "children": [{
@@ -1484,7 +1484,7 @@ var positionCatalog = [
       },
       {
         "code": 40300,
-        "tag": "互联网产品/运营管理>>",
+        "tag": "互联网产品/运营管理",
         "parent": 40000,
         "level": 2,
         "children": [{
@@ -1545,7 +1545,7 @@ var positionCatalog = [
       },
       {
         "code": 40400,
-        "tag": "IT质量管理/测试/配置管理>>",
+        "tag": "IT质量管理/测试/配置管理",
         "parent": 40000,
         "level": 2,
         "children": [{
@@ -1600,7 +1600,7 @@ var positionCatalog = [
       },
       {
         "code": 40500,
-        "tag": "IT运维/技术支持>>",
+        "tag": "IT运维/技术支持",
         "parent": 40000,
         "level": 2,
         "children": [{
@@ -1703,7 +1703,7 @@ var positionCatalog = [
       },
       {
         "code": 40600,
-        "tag": "IT管理/项目协调>>",
+        "tag": "IT管理/项目协调",
         "parent": 40000,
         "level": 2,
         "children": [{
@@ -1752,7 +1752,7 @@ var positionCatalog = [
       },
       {
         "code": 40700,
-        "tag": "电信/通信技术开发及应用>>",
+        "tag": "电信/通信技术开发及应用",
         "parent": 40000,
         "level": 2,
         "children": [{
@@ -1838,7 +1838,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 50100,
-        "tag": "房地产开发/经纪/中介>>",
+        "tag": "房地产开发/经纪/中介",
         "parent": 50000,
         "level": 2,
         "children": [{
@@ -1917,7 +1917,7 @@ var positionCatalog = [
       },
       {
         "code": 50200,
-        "tag": "土木/建筑/装修/市政工程>>",
+        "tag": "土木/建筑/装修/市政工程",
         "parent": 50000,
         "level": 2,
         "children": [{
@@ -2074,7 +2074,7 @@ var positionCatalog = [
       },
       {
         "code": 50300,
-        "tag": "物业管理>>",
+        "tag": "物业管理",
         "parent": 50000,
         "level": 2,
         "children": [{
@@ -2130,7 +2130,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 60100,
-        "tag": "银行>>",
+        "tag": "银行",
         "parent": 60000,
         "level": 2,
         "children": [{
@@ -2263,7 +2263,7 @@ var positionCatalog = [
       },
       {
         "code": 60200,
-        "tag": "证券/期货/投资管理/服务>>",
+        "tag": "证券/期货/投资管理/服务",
         "parent": 60000,
         "level": 2,
         "children": [{
@@ -2378,7 +2378,7 @@ var positionCatalog = [
       },
       {
         "code": 60300,
-        "tag": "保险>>",
+        "tag": "保险",
         "parent": 60000,
         "level": 2,
         "children": [{
@@ -2469,7 +2469,7 @@ var positionCatalog = [
       },
       {
         "code": 60400,
-        "tag": "信托/担保/拍卖/典当>>",
+        "tag": "信托/担保/拍卖/典当",
         "parent": 60000,
         "level": 2,
         "children": [{
@@ -2519,7 +2519,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 70100,
-        "tag": "采购/贸易>>",
+        "tag": "采购/贸易",
         "parent": 70000,
         "level": 2,
         "children": [{
@@ -2592,7 +2592,7 @@ var positionCatalog = [
       },
       {
         "code": 70200,
-        "tag": "交通运输服务>>",
+        "tag": "交通运输服务",
         "parent": 70000,
         "level": 2,
         "children": [{
@@ -2665,7 +2665,7 @@ var positionCatalog = [
       },
       {
         "code": 70300,
-        "tag": "物流/仓储>>",
+        "tag": "物流/仓储",
         "parent": 70000,
         "level": 2,
         "children": [{
@@ -2781,7 +2781,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 80100,
-        "tag": "生产管理/运营>>",
+        "tag": "生产管理/运营",
         "parent": 80000,
         "level": 2,
         "children": [{
@@ -2890,7 +2890,7 @@ var positionCatalog = [
       },
       {
         "code": 80200,
-        "tag": "电子/电器/半导体/仪器仪表>>",
+        "tag": "电子/电器/半导体/仪器仪表",
         "parent": 80000,
         "level": 2,
         "children": [{
@@ -3095,7 +3095,7 @@ var positionCatalog = [
       },
       {
         "code": 80300,
-        "tag": "汽车制造>>",
+        "tag": "汽车制造",
         "parent": 80000,
         "level": 2,
         "children": [{
@@ -3162,7 +3162,7 @@ var positionCatalog = [
       },
       {
         "code": 80400,
-        "tag": "汽车销售与服务>>",
+        "tag": "汽车销售与服务",
         "parent": 80000,
         "level": 2,
         "children": [{
@@ -3229,7 +3229,7 @@ var positionCatalog = [
       },
       {
         "code": 80500,
-        "tag": "机械设计/制造/维修>>",
+        "tag": "机械设计/制造/维修",
         "parent": 80000,
         "level": 2,
         "children": [{
@@ -3392,7 +3392,7 @@ var positionCatalog = [
       },
       {
         "code": 80600,
-        "tag": "服装/纺织/皮革设计/生产>>",
+        "tag": "服装/纺织/皮革设计/生产",
         "parent": 80000,
         "level": 2,
         "children": [{
@@ -3471,7 +3471,7 @@ var positionCatalog = [
       },
       {
         "code": 80700,
-        "tag": "技工/操作工>>",
+        "tag": "技工/操作工",
         "parent": 80000,
         "level": 2,
         "children": [{
@@ -3544,7 +3544,7 @@ var positionCatalog = [
       },
       {
         "code": 80800,
-        "tag": "生物/制药/医疗器械>>",
+        "tag": "生物/制药/医疗器械",
         "parent": 80000,
         "level": 2,
         "children": [{
@@ -3695,7 +3695,7 @@ var positionCatalog = [
       },
       {
         "code": 80900,
-        "tag": "化工>>",
+        "tag": "化工",
         "parent": 80000,
         "level": 2,
         "children": [{
@@ -3775,7 +3775,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 90200,
-        "tag": "艺术/设计>>",
+        "tag": "艺术/设计",
         "parent": 90000,
         "level": 2,
         "children": [{
@@ -3914,7 +3914,7 @@ var positionCatalog = [
       },
       {
         "code": 90100,
-        "tag": "影视/媒体/出版/印刷>>",
+        "tag": "影视/媒体/出版/印刷",
         "parent": 90000,
         "level": 2,
         "children": [{
@@ -4078,7 +4078,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 110600,
-        "tag": "社区/居民/家政服务>>",
+        "tag": "社区/居民/家政服务",
         "parent": 110000,
         "level": 2,
         "children": [{
@@ -4139,7 +4139,7 @@ var positionCatalog = [
       },
       {
         "code": 100400,
-        "tag": "翻译（口译与笔译）>>",
+        "tag": "翻译（口译与笔译）",
         "parent": 110000,
         "level": 2,
         "children": [{
@@ -4212,7 +4212,7 @@ var positionCatalog = [
       },
       {
         "code": 110100,
-        "tag": "商超/酒店/娱乐管理/服务>>",
+        "tag": "商超/酒店/娱乐管理/服务",
         "parent": 110000,
         "level": 2,
         "children": [{
@@ -4345,7 +4345,7 @@ var positionCatalog = [
       },
       {
         "code": 110200,
-        "tag": "旅游/度假/出入境服务>>",
+        "tag": "旅游/度假/出入境服务",
         "parent": 110000,
         "level": 2,
         "children": [{
@@ -4394,7 +4394,7 @@ var positionCatalog = [
       },
       {
         "code": 110300,
-        "tag": "烹饪/料理/食品研发>>",
+        "tag": "烹饪/料理/食品研发",
         "parent": 110000,
         "level": 2,
         "children": [{
@@ -4449,7 +4449,7 @@ var positionCatalog = [
       },
       {
         "code": 100100,
-        "tag": "咨询/顾问/调研/数据分析>>",
+        "tag": "咨询/顾问/调研/数据分析",
         "parent": 110000,
         "level": 2,
         "children": [{
@@ -4516,7 +4516,7 @@ var positionCatalog = [
       },
       {
         "code": 110400,
-        "tag": "保健/美容/美发/健身>>",
+        "tag": "保健/美容/美发/健身",
         "parent": 110000,
         "level": 2,
         "children": [{
@@ -4571,7 +4571,7 @@ var positionCatalog = [
       },
       {
         "code": 100200,
-        "tag": "教育/培训>>",
+        "tag": "教育/培训",
         "parent": 110000,
         "level": 2,
         "children": [{
@@ -4716,7 +4716,7 @@ var positionCatalog = [
       },
       {
         "code": 110500,
-        "tag": "医院/医疗/护理>>",
+        "tag": "医院/医疗/护理",
         "parent": 110000,
         "level": 2,
         "children": [{
@@ -4843,7 +4843,7 @@ var positionCatalog = [
       },
       {
         "code": 100300,
-        "tag": "律师/法务/合规>>",
+        "tag": "律师/法务/合规",
         "parent": 110000,
         "level": 2,
         "children": [{
@@ -4911,7 +4911,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 120100,
-        "tag": "能源/矿产/地质勘查>>",
+        "tag": "能源/矿产/地质勘查",
         "parent": 120000,
         "level": 2,
         "children": [{
@@ -4966,7 +4966,7 @@ var positionCatalog = [
       },
       {
         "code": 120200,
-        "tag": "环境科学/环保>>",
+        "tag": "环境科学/环保",
         "parent": 120000,
         "level": 2,
         "children": [{
@@ -5027,7 +5027,7 @@ var positionCatalog = [
       },
       {
         "code": 120300,
-        "tag": "农/林/牧/渔业>>",
+        "tag": "农/林/牧/渔业",
         "parent": 120000,
         "level": 2,
         "children": [{
@@ -5082,7 +5082,7 @@ var positionCatalog = [
       },
       {
         "code": 120400,
-        "tag": "公务员/事业单位/科研机构>>",
+        "tag": "公务员/事业单位/科研机构",
         "parent": 120000,
         "level": 2,
         "children": [{
@@ -5120,7 +5120,7 @@ var positionCatalog = [
     "level": 1,
     "children": [{
         "code": 130100,
-        "tag": "实习生/培训生/储备干部>>",
+        "tag": "实习生/培训生/储备干部",
         "parent": 130000,
         "level": 2,
         "children": [{
@@ -5151,7 +5151,7 @@ var positionCatalog = [
       },
       {
         "code": 130200,
-        "tag": "志愿者/社会工作者>>",
+        "tag": "志愿者/社会工作者",
         "parent": 130000,
         "level": 2,
         "children": [{
@@ -5176,7 +5176,7 @@ var positionCatalog = [
       },
       {
         "code": 130300,
-        "tag": "兼职/临时>>",
+        "tag": "兼职/临时",
         "parent": 130000,
         "level": 2,
         "children": [{
@@ -5201,7 +5201,7 @@ var positionCatalog = [
       },
       {
         "code": 130400,
-        "tag": "其他>>",
+        "tag": "其他",
         "parent": 130000,
         "level": 2,
         "children": [{

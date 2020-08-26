@@ -1,6 +1,7 @@
 // component/skilladd/skilladd.js
 const app = getApp()
 import WxValidate from '../../utils/WxValidate.js'
+const timeUtil = require('../../utils/timeUtil.js');
 Page({
 
   /**
@@ -80,7 +81,7 @@ Page({
   keep: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}/skills`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/skill`, // 拼接接口地址(前面为公共部分)
       method: 'post',
       header: {
         'content-type': 'application/json',
@@ -93,7 +94,7 @@ Page({
       },
       success(res) {
         if (app.globalData.token) {
-          if(res.data.code === 201) {
+          if(res.statusCode === 200) {
             wx.navigateBack({
               delta: 1, //返回上一个页面
             })

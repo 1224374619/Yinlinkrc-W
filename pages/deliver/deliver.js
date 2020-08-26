@@ -22,7 +22,7 @@ Page({
   Mydeliver: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + '/submitted/positions', // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + '/submitted/position', // 拼接接口地址(前面为公共部分)
       method: 'get',
       header: {
         'content-type': 'application/json',

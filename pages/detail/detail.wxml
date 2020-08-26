@@ -19,9 +19,9 @@
 					<view wx:if='{{positionList.workAgeMin}} === 0'>无工作经验</view>
 					<view wx:else>{{positionList.workAgeMin}}-{{positionList.workAgeMax}}年</view>
 					<view>|</view>
-					<view>{{qualifications.qualifications(positionList.degreeMin)}}</view>
+					<view>{{positionList.degreeMin}}</view>
 					<view>|</view>
-					<view>{{jobType.jobType(positionList.jobType)}}</view>
+					<view>{{positionList.jobType}}</view>
 				</view>
 			</view>
 			<view style="text-align:right">
@@ -71,13 +71,12 @@
 	<view hidden="{{hiddenns}}">
 		<view class="content">
 			<view>
-				<view class="positions">{{companyList.companyName}}</view>
+				<view class="positions">{{companyList.fullName}}</view>
 				<view class="companys">
-					<view style="width:230rpx">{{CodeToTag.CodeToTag([(companyList.industry/100|int)*100,companyList.industry],industryList)[1]}}</view>
-					<!-- <view>|</view> -->
-					<view>{{quality.quality(companyList.nature)}}</view>
+					<view style="width:260rpx">{{companyList.industrySecondary}}</view>
+					<view>{{companyList.nature}}</view>
 					<view>|</view>
-					<view>{{size.size(companyList.size)}}</view>
+					<view>{{companyList.size}}</view>
 				</view>
 			</view>
 			<view>

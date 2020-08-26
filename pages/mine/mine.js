@@ -61,7 +61,7 @@ Page({
   brief: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + '/resumes/brief', // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + '/resume/brief', // 拼接接口地址(前面为公共部分)
       method: 'get',
       header: {
         'content-type': 'application/json',
@@ -73,7 +73,7 @@ Page({
           // let deliverTotal = res.data.data.total
           let defaultResumeId = res.data.data.defaultResumeId
           app.globalData.resumeId = defaultResumeId
-          wx.setStorageSync('2', res.data.data.avatarUrl)
+          wx.setStorageSync('2', res.data.data.base.avatarUrl)
           var value = wx.getStorageSync('2')
           if (value) {
             that.setData({
@@ -151,7 +151,7 @@ Page({
   Mydeliver: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + '/submitted/positions', // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + '/submitted/position', // 拼接接口地址(前面为公共部分)
       method: 'get',
       header: {
         'content-type': 'application/json',
@@ -175,7 +175,7 @@ Page({
   Mycollect: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + '/favorite/positions', // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + '/favorite/position', // 拼接接口地址(前面为公共部分)
       method: 'get',
       header: {
         'content-type': 'application/json',
@@ -201,7 +201,7 @@ Page({
   briefDetail: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}`, // 拼接接口地址(前面为公共部分)
       method: 'get',
       header: {
         'content-type': 'application/json',
@@ -214,17 +214,6 @@ Page({
             // avatarUrl: resumeList.avatarUrl,
             resumeDetailList: resumeList,
             completedPercent: resumeList.completedPercent
-            // baseList: resumeList.base,
-            // eduList: resumeList.eduExpr,
-            // workList: resumeList.workExpr,
-            // projectsList: resumeList.projects,
-            // trainList: resumeList.training,
-            // languagesList: resumeList.languages,
-            // qualificationsList: resumeList.qualifications,
-            // skillList: resumeList.skills,
-            // awardsList: resumeList.awards,
-            // evaluationList: resumeList.evaluation,
-            // jobintensionList: resumeList.target,
           });
         } else {
           console.log('没有数据')
@@ -237,7 +226,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.brief(),
+    
     console.log(app.globalData.token)
     if (app.globalData.token) {
       this.setData({
@@ -264,9 +253,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.brief(),
     this.Mydeliver(),
-      this.Mycollect(),
-      wx.hideHomeButton()
+    this.Mycollect(),
+    wx.hideHomeButton()
     this.briefDetail()
   },
 

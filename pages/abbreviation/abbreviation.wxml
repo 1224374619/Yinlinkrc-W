@@ -11,7 +11,8 @@
 				<input class="weui-input-code" bindblur="outplaceholdercode" bindfocus="placeholdercode" name='code' type="number" bindinput="getInputcode" placeholder-class="place-holder" placeholder="{{placeholdercode}}" />
 			</view>
 			<view>
-				<button style="width:300rpx" class="weui-button" bindtap="getCaptcha" :disabled="frozen">
+				<!-- <button bindtap="getCaptcha"  disabled="{{smsFlag}}" style='margin-left:30rpx;color:{{sendColor}};font-size:28rpx;width:300rpx;'>{{captchaStatusText}}</button> -->
+				<button style="width:300rpx;background:{{sendColor}}" disabled="{{smsFlag}}" class="weui-button" bindtap="getCaptcha">
 					{{captchaStatusText}}
 				</button>
 			</view>

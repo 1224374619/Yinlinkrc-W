@@ -9,8 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    telValue: '15516946795',
-    passValue: '123456',
+    telValue: '',
+    passValue: '',
     isPassword: true,
     placeholder: '请输入手机号',
     placeholderpwd: '请输入密码',
@@ -114,20 +114,41 @@ Page({
     })
   },
   brief: function () {
-    let that = this;
     wx.request({
-      url: app.config.uploadHost + '/resumes/brief', // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + '/resume/brief', // 拼接接口地址(前面为公共部分)
       method: 'get',
       header: {
         'content-type': 'application/json',
         'Auth-Token': app.globalData.token
       },
       success(res) {
-        if (app.globalData.token) {
+        console.log(res)
+        if (res.statusCode === 200) {
           let defaultResumeId = res.data.data.defaultResumeId
           app.globalData.resumeId = defaultResumeId
         } else {
-          console.log('没有数据')
+          wx.request({
+            url: app.config.uploadHost + '/resume', // 拼接接口地址(前面为公共部分)
+            method: 'post',
+            header: {
+              'content-type': 'application/json',
+              'Auth-Token': app.globalData.token
+            },
+            success(res) {
+              wx.request({
+                url: app.config.uploadHost + '/resume/brief', // 拼接接口地址(前面为公共部分)
+                method: 'get',
+                header: {
+                  'content-type': 'application/json',
+                  'Auth-Token': app.globalData.token
+                },
+                success(res) {
+                  let defaultResumeId = res.data.data.defaultResumeId
+                  app.globalData.resumeId = defaultResumeId
+                }
+              })
+            }
+          })
         }
       }
     })

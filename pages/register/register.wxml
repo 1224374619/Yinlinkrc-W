@@ -9,25 +9,28 @@
 		<view class="title-bottom">懂你的人才网站</view>
 	</view>
 	<form bindsubmit="submitIssue">
-	<view class="weui-cell_input">
-		<input class="weui-input" bindblur="outplaceholders" bindfocus="placeholders" name='phone' type="number" bindinput="getInput" placeholder-class="place-holder" placeholder="{{placeholder}}" />
-	</view>
-	<view class="weui-cell_input">
-		<view style="width:200rpx;">
-			<input class="weui-input-code" bindblur="outplaceholdercode" bindfocus="placeholdercode" name='code' type="number" bindinput="getInputcode" placeholder-class="place-holder" placeholder="{{placeholdercode}}" />
+		<view class="weui-cell_input">
+			<input class="weui-input" bindblur="outplaceholders" bindfocus="placeholders" name='phone' type="number" bindinput="getInput" placeholder-class="place-holder" placeholder="{{placeholder}}" />
 		</view>
-		<view>
-			<button style="width:300rpx" class="weui-button" bindtap="getCaptcha">
-				{{captchaStatusText}}
-			</button>
+		<view class="weui-cell_input">
+			<view style="width:200rpx;">
+				<input class="weui-input-code" bindblur="outplaceholdercode" bindfocus="placeholdercode" name='code' type="number" bindinput="getInputcode" placeholder-class="place-holder" placeholder="{{placeholdercode}}" />
+			</view>
+			<view>
+				<button style="width:300rpx;background:{{sendColor}}" disabled="{{smsFlag}}" class="weui-button" bindtap="getCaptcha">
+					{{captchaStatusText}}
+				</button>
+				<!-- <button style="width:300rpx" class="weui-button" bindtap="getCaptcha">
+					{{captchaStatusText}}
+				</button> -->
+			</view>
 		</view>
-	</view>
-	<view class="weui-cell_input">
-		<input class="weui-input" bindblur="outplaceholderpwd" bindfocus="placeholderpwd" name='password' type="password" bindinput="getInputpass" placeholder-class="place-holder" placeholder="{{placeholderpwd}}" />
-	</view>
-	<button class='login' form-type="submit">
-		立 即 注 册
-	</button>
+		<view class="weui-cell_input">
+			<input class="weui-input" bindblur="outplaceholderpwd" bindfocus="placeholderpwd" name='password' type="password" bindinput="getInputpass" placeholder-class="place-holder" placeholder="{{placeholderpwd}}" />
+		</view>
+		<button class='login' form-type="submit">
+			立 即 注 册
+		</button>
 	</form>
 	<i-toast id="toast" />
 	<view class="foot" bindtap="treaty">

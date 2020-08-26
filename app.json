@@ -1,14 +1,14 @@
 {
   "pages": [
+    
     "pages/home/home",
     "component/projectadd/projectadd",
     "component/project/project",
     "component/work/work",
     "component/workadd/workadd",
     "component/personal/personal",
-  
-    "component/baseadd/baseadd",
     "component/jobintensionadd/jobintensionadd",
+    "component/baseadd/baseadd",
     "pages/login/login",
 
     "component/jobintension/jobintension",

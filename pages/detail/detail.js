@@ -82,11 +82,10 @@ Page({
   companyDetail: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/companies/${this.data.companyId}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/company/${this.data.companyId}`, // 拼接接口地址(前面为公共部分)
       method: 'get',
       header: {
         'content-type': 'application/json',
-        'Auth-Token': app.globalData.token
       },
       success(res) {
         let companyList = res.data.data
@@ -99,11 +98,10 @@ Page({
   positionDetail: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/positions/${this.data.positionId}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/position/${this.data.positionId}`, // 拼接接口地址(前面为公共部分)
       method: 'get',
       header: {
         'content-type': 'application/json',
-        'Auth-Token': app.globalData.token
       },
       success(res) {
         let positionList = res.data.data
@@ -118,7 +116,7 @@ Page({
   submitted: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/submitted/positions/${this.data.positionId}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/submitted/position/${this.data.positionId}`, // 拼接接口地址(前面为公共部分)
       method: 'get',
       header: {
         'content-type': 'application/json',
@@ -144,7 +142,7 @@ Page({
   favorite: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/favorite/positions/${this.data.positionId}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/favorite/position/${this.data.positionId}`, // 拼接接口地址(前面为公共部分)
       method: 'get',
       header: {
         'content-type': 'application/json',
@@ -170,7 +168,7 @@ Page({
   submitteds: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/submitted/positions/${this.data.positionId}/resume/${app.globalData.resumeId}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/submitted/position/${this.data.positionId}/resume/${app.globalData.resumeId}`, // 拼接接口地址(前面为公共部分)
       method: 'put',
       header: {
         'content-type': 'application/json',
@@ -204,7 +202,7 @@ Page({
   favorites: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/favorite/positions/${this.data.positionId}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/favorite/position/${this.data.positionId}`, // 拼接接口地址(前面为公共部分)
       method: 'put',
       header: {
         'content-type': 'application/json',
@@ -247,11 +245,6 @@ Page({
         }
       }
     })
-    // isfavorite(c).then(res => {
-    //   if (res.data.code === 200) {
-    //     this.favorite();
-    //   }
-    // });
   },
   //登录
   login: function () {

@@ -26,14 +26,14 @@
 			<view>
 				<view style="margin:40rpx 0 0 0;height:40rpx;" bindtap="base" data-base='{{resumeDetailList.base}}' data-id='{{id}}'>
 					<text style="font-size:40rpx;font-weight:bold;margin:60rpx 10rpx 0 40rpx;">{{resumeDetailList.base.fullName}}</text>
-					<image wx:if='{{resumeDetailList.base.sex == 0}}' style="height:24rpx;width:24rpx;"  src="../../icons/jianli-nan.png"></image>
+					<image wx:if='{{resumeDetailList.base.sexCode == 0}}' style="height:24rpx;width:24rpx;"  src="../../icons/jianli-nan.png"></image>
 					<image wx:else style="height:24rpx;width:24rpx;"  src="../../icons/jianli-nv.png"></image>
 					<image style="height:24rpx;width:24rpx;margin:0 0 0 20rpx" src="../../icons/jianli-bianji.png"></image><text style="font-size:24rpx;margin:0 0 0 5rpx;color:#999999">编辑</text>
 				</view>
 				<view style="display:flex;flex-direction:row;margin:28rpx 0 0 0;" >
 					<view style="margin:8rpx 0 0 0;display:flex;flex-direction:row;">
 					  <image style="height:32rpx;width:32rpx;margin:0 20rpx 0 40rpx"  src="../../icons/jianli-xianjudi.png"></image>
-						<view style="font-size:24rpx;line-height:32rpx;width:120rpx;">{{CodeToTag.CodeToTag([resumeDetailList.base.province,resumeDetailList.base.county],cityList)[1]}}</view>
+						<view style="font-size:24rpx;line-height:32rpx;width:120rpx;">{{resumeDetailList.base.district}}</view>
 					</view>
 					<view style="margin:8rpx 0 0 0;display:flex;flex-direction:row;">
 					  <image style="height:32rpx;width:32rpx;margin:0 20rpx 0 15rpx"  src="../../icons/jianli-nianling.png"></image>
@@ -41,13 +41,13 @@
 					</view>
 					<view style="margin:8rpx 0 0 0;display:flex;flex-direction:row;">
 						<image style="height:32rpx;width:32rpx;margin:0 20rpx 0 40rpx"  src="../../icons/zhengzhibeij.png"></image>
-						<view style="font-size:24rpx;line-height:32rpx">{{politicalStatus.politicalStatus(resumeDetailList.base.politicalStatus)}}</view>
+						<view style="font-size:24rpx;line-height:32rpx">{{politicalStatus.politicalStatus(resumeDetailList.base.politicalStatusCode)}}</view>
 					</view>
 				</view>
 				<view style="display:flex;flex-direction:row;">
 					<view style="margin:20rpx 0 0 0;display:flex;flex-direction:row;">
 						<image style="height:32rpx;width:32rpx;margin:0 20rpx 0 40rpx"  src="../../icons/jianli-xueli.png"></image>
-						<view style="font-size:24rpx;line-height:32rpx">{{qualifications.qualifications(resumeDetailList.base.degree)}}</view>
+						<view style="font-size:24rpx;line-height:32rpx">{{qualifications.qualifications(resumeDetailList.base.degreeCode)}}</view>
 					</view>
 					<view style="margin:20rpx 0 0 50rpx;display:flex;flex-direction:row;">
 						<image style="height:32rpx;width:32rpx;margin:0 20rpx 0 40rpx"  src="../../icons/jianli-gonhgzuojingyan.png"></image>
@@ -80,18 +80,18 @@
 		</view>
 		<view class="jobintension" wx:else>
 			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" data-target='{{resumeDetailList.target}}' bindtap="jobintension"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>求职意向</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jianli-bianji.png"></image></view>
-			<view style="margin:30rpx 0 0 40rpx;font-size:28rpx;">职位类型：{{CodeToTag.CodeToTag([((resumeDetailList.target.positionCatalogs[0].code/100|int)*100/10000|int)*10000,(resumeDetailList.target.positionCatalogs[0].code/100|int)*100,resumeDetailList.target.positionCatalogs[0].code],positionCatalogList)[2]}}</view>
-			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">企业行业：{{CodeToTag.CodeToTag([(resumeDetailList.target.industries[0].code/100|int)*100,resumeDetailList.target.industries[0].code],industryList)[1]}}</view>
-			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">工作城市：{{CodeToTag.CodeToTag([resumeDetailList.target.province,resumeDetailList.target.county],cityList)[1]}}</view>
+			<view style="margin:30rpx 0 0 40rpx;font-size:28rpx;">职位类型：{{resumeDetailList.target.positionCatalogs[0].first}}/{{resumeDetailList.target.positionCatalogs[0].secondary}}/{{resumeDetailList.target.positionCatalogs[0].third}}</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">企业行业：{{resumeDetailList.target.industries[0].first}}/{{resumeDetailList.target.industries[0].secondary}}</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">工作城市：{{resumeDetailList.target.cities[0].province}}/{{resumeDetailList.target.cities[0].city}}/{{resumeDetailList.target.cities[0].district}}</view>
 			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx" wx:if='{{resumeDetailList.target.salaryMin === 35}}'>薪资范围：{{resumeDetailList.target.salaryMin}}k以上</view>
 			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx" wx:else>薪资范围：{{resumeDetailList.target.salaryMin}}k - {{resumeDetailList.target.salaryMax}}k</view>
-			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">工作类型：{{jobType.jobType(resumeDetailList.target.jobType)}}</view>
-			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">求职状态：{{jobSearchStatus.jobSearchStatus(resumeDetailList.target.jobSearchStatus)}}</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">工作类型：{{jobType.jobType(resumeDetailList.target.jobTypeCode)}}</view>
+			<view style="margin:20rpx 0 0 40rpx;font-size:28rpx">求职状态：{{jobSearchStatus.jobSearchStatus(resumeDetailList.target.jobSearchStatusCode)}}</view>
 		</view>
 		<view class="line"></view>
 		<view class="education">
 			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="educationadd"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>教育经历</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jia.png"></image></view>
-			<view wx:for="{{resumeDetailList.eduExpr}}" data-item="item" wx:for-index="idx" bindtap="education" data-edu='{{item}}' style="margin-bottom:40rpx">
+			<view wx:for="{{resumeDetailList.eduXps}}" data-item="item" wx:for-index="idx" bindtap="education" data-edu='{{item}}' style="margin-bottom:40rpx">
 				<view style="margin:30rpx 0 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;justify-content:space-between">
 				  <view>
 						<text>{{item.school}}</text>
@@ -103,7 +103,7 @@
 					</view>
 				</view>
 				<view style="margin:20rpx 0 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;">
-					<text>{{qualifications.qualifications(item.degree)}}</text>
+					<text>{{item.degree}}</text>
 					<text style="margin:0 0 0 20rpx">{{isUnified.isUnified(item.isUnified)}}</text>
 				</view>
 			</view>
@@ -111,7 +111,7 @@
 		<view class="line"></view>
 		<view class="work">
 			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="workadd"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>工作经历</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jia.png"></image></view>
-			<view wx:for="{{resumeDetailList.workExpr}}" data-item="item" wx:for-index="idx" bindtap="work" data-work='{{item}}' style="margin-bottom:40rpx">
+			<view wx:for="{{resumeDetailList.workXps}}" data-item="item" wx:for-index="idx" bindtap="work" data-work='{{item}}' style="margin-bottom:40rpx">
 			<view style="margin:30rpx 0 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;justify-content:space-between">
 			<view>
 			<text style="width:200rpx;">{{item.company}}</text>
@@ -147,7 +147,7 @@
 		<view class="line"></view>
 		<view class="train">
 			<view style="margin:40rpx 40rpx 0 0;font-size:32rpx;display:flex;justify-content:space-between;color:#222222" bindtap="trainadd"><view><image style="height:12rpx;width:12rpx;margin:0 14rpx 5rpx 20rpx"  src="../../icons/jianli-xiaobiaotiqianzhui.png"></image>培训经历</view><image style="height:26rpx;width:26rpx;margin:10rpx 0 0 0"  src="../../icons/jia.png"></image></view>
-			<view wx:for="{{resumeDetailList.training}}" data-item="item" wx:for-index="idx" bindtap="train" data-train='{{item}}' style="margin-bottom:40rpx">
+			<view wx:for="{{resumeDetailList.trainings}}" data-item="item" wx:for-index="idx" bindtap="train" data-train='{{item}}' style="margin-bottom:40rpx">
 
       <view style="margin:30rpx 0 0 40rpx;font-size:28rpx;display: flex;flex-direction: row;justify-content:space-between">
 			<view>

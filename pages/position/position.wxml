@@ -253,15 +253,15 @@
 		<view wx:for="{{companyList}}" data-item="item" wx:for-index="idx">
 			<view class="company-list" bindtap="position" data-positionid='{{item.id}}' data-id='{{item.company.id}}' data-positionName='{{item.positionName}}' data-companyName='{{item.company.companyName}}'>
 				<view class='nav'>
-					<image class="img" src="../../icons/1.png"></image>
+					<image class="img" src="../../icons/logo.jpg"></image>
 				</view>
 				<view class='aside'>
-					<view style="font-size:32rpx;width:330rpx" wx:if="{{item.positionName.length > 10}}">{{sub.sub(item.positionName)}}</view>
+					<view style="font-size:32rpx;width:330rpx" wx:if="{{item.positionName.length > 9}}">{{sub.sub(item.positionName)}}</view>
 					<view style="font-size:32rpx;width:330rpx" wx:else>{{item.positionName}}</view>
-					<view style="color:#979797;font-size:28rpx" wx:if="{{item.company.companyName.length > 10}}">{{sub.sub(item.company.companyName)}}</view>
+					<view style="color:#979797;font-size:28rpx" wx:if="{{item.company.companyName.length > 9}}">{{sub.sub(item.company.companyName)}}</view>
 					<view style="color:#979797;font-size:28rpx" wx:else>{{item.company.companyName}}</view>
-					<view style="color:#bebebe;font-size:24rpx;" wx:if='{{item.workAgeMin === 0}}'>{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | 无工作经验 | {{qualifications.qualifications(item.degreeMin)}}</view>
-					<view style="color:#bebebe;font-size:24rpx;" wx:else>{{CodeToTag.CodeToTag([item.workAddress.province,item.workAddress.county],cityList)[1]}} | {{item.workAgeMin}}-{{item.workAgeMax}}年 | {{qualifications.qualifications(item.degreeMin)}}</view>
+					<view style="color:#bebebe;font-size:24rpx;" wx:if='{{item.workAgeMin === 0}}'>{{item.workAddress.city}} | 无工作经验 | {{item.degreeMin}}</view>
+					<view style="color:#bebebe;font-size:24rpx;" wx:else>{{item.workAddress.city}} | {{item.workAgeMin}}-{{item.workAgeMax}}年 | {{item.degreeMin}}</view>
 				</view>
 				<view class='foot'>
 					<view style="color:#e13627;margin:-5px 0 0 0;width:200rpx;font-size:28rpx">{{item.salaryMin}}k-{{item.salaryMax}}k/每月</view>

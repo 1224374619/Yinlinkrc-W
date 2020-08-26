@@ -235,32 +235,32 @@ Page({
     //   showLoadings: true
     // });
     wx.request({
-      url: app.config.uploadHost + '/positions/search', // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + '/position/search', // 拼接接口地址(前面为公共部分)
       method: 'post',
       header: {
         'content-type': 'application/json',
-        'Auth-Token': app.globalData.token
       },
       data: {
         addresses: null,
         degreeMin: null,
         industries: null,
+        industryCodes: null,
         isGraduate: true,
         jobType: null,
-        keyword: null,
-        pageNum: 1,
+        keywords: null,
         natures: null,
-        pageSize: 40,
+        pageNum: 1,
+        pageSize: 10,
+        positionCatalog: null,
         publishedInterval: null,
+        publishedTime: null,
         salaryMax: null,
         salaryMin: null,
         size: null,
         sortBy: null,
         sortOrder: null,
         workAgeMax: null,
-        workAgeMin: null,
-        positionCatalog: null,
-        industryCodes: null
+        workAgeMin: null
       },
       success(res) {
         var newsList = res.data.data.list
@@ -285,32 +285,32 @@ Page({
     // })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: app.config.uploadHost + '/positions/search',
+      url: app.config.uploadHost + '/position/search',
       data: {
         addresses: null,
         degreeMin: null,
         industries: null,
+        industryCodes: null,
         isGraduate: true,
         jobType: null,
-        keyword: null,
-        pageNum: currentPage,
+        keywords: null,
         natures: null,
+        pageNum: currentPage,
         pageSize: 10,
+        positionCatalog: null,
         publishedInterval: null,
+        publishedTime: null,
         salaryMax: null,
         salaryMin: null,
         size: null,
         sortBy: null,
         sortOrder: null,
         workAgeMax: null,
-        workAgeMin: null,
-        positionCatalog: null,
-        industryCodes: null
+        workAgeMin: null
       },
       method: 'post',
       header: {
         'content-type': 'application/json',
-        'Auth-Token': app.globalData.token
       },
       success: function (res) {
         if (currentPage - 2 >= parseInt(res.data.data.total / 10)) {

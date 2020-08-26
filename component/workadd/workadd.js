@@ -7,7 +7,7 @@ const date = new Date()
 const years = []
 const months = []
 const days = []
-for (let i = 1990; i <= date.getFullYear(); i++) {
+for (let i = 1960; i <= date.getFullYear(); i++) {
   years.push(i)
 }
 for (let i = 1; i <= 12; i++) {
@@ -304,7 +304,6 @@ Page({
 
 
   bindTextAreaBlur: function (e) {
-    console.log(e.detail.value)
     this.setData({
       dutys: e.detail.value
     })
@@ -323,10 +322,8 @@ Page({
     let that = this;
     let til = new Date(that.data.begindate.replace(/-/g, "/")).getTime()
     let till = new Date(that.data.enddate.replace(/-/g, "/")).getTime()
-    let aaa = that.data.dutys
-    console.log(aaa)
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}/workXps`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/work`, // 拼接接口地址(前面为公共部分)
       method: 'post',
       header: {
         'content-type': 'application/json',
@@ -337,11 +334,11 @@ Page({
         endTime: till,
         company: that.data.company,
         position: that.data.position,
-        description: aaa
+        description: that.data.dutys
       },
       success(res) {
         if (app.globalData.token) {
-          if (res.data.code === 201) {
+          if (res.statusCode === 200) {
             wx.navigateBack({
               delta: 1, //返回上一个页面
             })

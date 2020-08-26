@@ -78,12 +78,12 @@
 		<view class="line"></view>
 		<view style="display:flex;flex-direction:column;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
 			<view>个人职责</view>
-			<view><textarea style="margin:30rpx 0 0 0;width:100%" class="weui-input" name='duty' bindinput="duty" value="{{duty}}" placeholder-class="nickname_placeholder" auto-height = false maxlength="-1" placeholder="" /></view>
+			<view><textarea style="margin:30rpx 0 0 0;width:100%"  name='duty' bindinput="duty" value="{{duty}}" placeholder-class="nickname_placeholder" auto-height = false maxlength="-1" placeholder="" /></view>
 		</view>
 		<view class="line"></view>
 		<view style="display:flex;flex-direction:column;justify-content:space-between;margin:30rpx 40rpx 0 40rpx">
 			<view>项目介绍</view>
-			<view><textarea style="margin:30rpx 0 0 0;width:100%" class="weui-input" name='description' bindinput="description" value="{{description}}" auto-height = false maxlength="-1" placeholder-class="nickname_placeholder" placeholder="" /></view>
+			<view><textarea style="margin:30rpx 0 0 0;width:100%"  name='description' bindinput="description" value="{{description}}" auto-height = false maxlength="-1" placeholder-class="nickname_placeholder" placeholder="" /></view>
 		</view>
 		<view class="line"></view>
 		<button form-type="submit" class="button">保存</button>

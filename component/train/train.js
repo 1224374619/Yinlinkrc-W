@@ -6,7 +6,7 @@ const date = new Date()
 const years = []
 const months = []
 const days = []
-for (let i = 1990; i <= date.getFullYear(); i++) {
+for (let i = 1960; i <= date.getFullYear(); i++) {
   years.push(i)
 }
 for (let i = 1; i <= 12; i++) {
@@ -322,7 +322,7 @@ Page({
     let til = new Date(that.data.begindate.replace(/-/g, "/")).getTime()
     let till = new Date(that.data.enddate.replace(/-/g, "/")).getTime()
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}/trainings/${this.data.trainList.id}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/training/${this.data.trainList.id}`, // 拼接接口地址(前面为公共部分)
       method: 'put',
       header: {
         'content-type': 'application/json',
@@ -333,10 +333,11 @@ Page({
         endTime: till,
         institution: that.data.institution,
         lesson: that.data.lesson,
+        toPresent: true
       },
       success(res) {
         if (app.globalData.token) {
-          if (res.data.code === 200) {
+          if (res.statusCode === 200) {
             wx.navigateBack({
               delta: 1, //返回上一个页面
             })
@@ -354,7 +355,7 @@ Page({
   delete: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}/trainings/${this.data.trainList.id}`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/training/${this.data.trainList.id}`, // 拼接接口地址(前面为公共部分)
       method: 'delete',
       header: {
         'content-type': 'application/json',

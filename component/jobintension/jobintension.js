@@ -3,6 +3,7 @@
 var positionCatalogList = require('../../utils/positionCatalog.js');
 var industryList = require('../../utils/industry.js');
 import WxValidate from '../../utils/WxValidate.js'
+const timeUtil = require('../../utils/timeUtil.js');
 var cityData = require('../../utils/city.js');
 const app = getApp()
 const time = require("../../utils/util.js");
@@ -18,9 +19,14 @@ Page({
     citys: [],
     districts: [],
     value: [0, 0, 0],
-    provinceTag:'',
+    provinceTag: '',
     cityTag: '',
     districtTag: '',
+    showModalStatus: false,
+    showModalStatusCity: false,
+    cityCode: '',
+    districtCode: '',
+    provinceCode: '',
 
     positionData: positionCatalogList.positionCatalog,
     positionCatalogFirst: [],
@@ -196,7 +202,7 @@ Page({
         provinceTag: provinceObj.tag,
         value: [current_value[0], 0, 0]
       });
-    }  else if (value[0] === current_value[0] && value[1] !== current_value[1]) {
+    } else if (value[0] === current_value[0] && value[1] !== current_value[1]) {
       // 滑动城市
       if (current_value[1] >= provinceObj.children.length) {
         // 数据不存在 跳过
@@ -217,6 +223,7 @@ Page({
       this.setData({
         value: current_value,
         districtTag: cityObj.children[this.data.value[2]].tag,
+        districtCode: cityObj.children[this.data.value[2]].code,
       });
     }
     if (cityObj.code === null) {
@@ -227,8 +234,10 @@ Page({
       this.setData({
         cityTag: cityObj.tag,
         cityCode: cityObj.code,
-        // district:
-        provinceTag: provinceObj.tag
+        provinceTag: provinceObj.tag,
+        provinceCode: provinceObj.code,
+        districtTag: cityObj.children[this.data.value[2]].tag,
+        districtCode: cityObj.children[this.data.value[2]].code,
       });
     }
   },
@@ -317,6 +326,8 @@ Page({
       });
     } else {
       this.setData({
+        positionCatalogFirstTag: positionCatalogFirstObj.tag,
+        positionCatalogSecondTag: positionCatalogSecondObj.tag,
         PositionTag: positionCatalogSecondObj.children[this.data.valuePosition[2]].tag,
         PositionCode: positionCatalogSecondObj.children[this.data.valuePosition[2]].code
       });
@@ -643,10 +654,10 @@ Page({
           first:  that.data.industryFirstTag,
           secondary: that.data.industrySecondTag,
         }],
-        jobSearchStatus: that.data.jobSearchStatusCad,
-        jobSearchStatusCode: 0,
-        jobType: that.data.jobTypeCad,
-        jobTypeCode: 0,
+        jobSearchStatus: timeUtil.jobSearchStatus(parseInt(that.data.jobSearchStatusCad)),
+        jobSearchStatusCode: that.data.jobSearchStatusCad,
+        jobType: timeUtil.jobType(parseInt(that.data.jobTypeCad)),
+        jobTypeCode: that.data.jobTypeCad,
         positionCatalogs: [{
           first: that.data.positionCatalogFirstTag,
           secondary: that.data.positionCatalogSecondTag,
@@ -821,15 +832,19 @@ Page({
         })
         break;
     }
+    console.log(target.industries[0].secondary)
     this.setData({
       targetList: target,
-      cityTag: time.CodeToTag([target.province, target.county], cityData.city)[1],
-      industryTag: time.CodeToTag([parseInt(target.industries[0].code / 100) * 100, target.industries[0].code], industryList.industry)[1],
-      PositionTag: time.CodeToTag([parseInt(parseInt(target.positionCatalogs[0].code / 100) * 100 / 10000) * 10000, parseInt(target.positionCatalogs[0].code / 100) * 100, target.positionCatalogs[0].code], positionCatalogList.positionCatalog)[2],
-      jobTypeCad: target.jobType,
-      industryCode: target.industries[0].code,
-      PositionCode: target.positionCatalogs[0].code,
-      jobSearchStatusCad: target.jobSearchStatus,
+      industrySecondTag: target.industries[0].secondary,
+      industryFirstTag: target.industries[0].first,
+      PositionTag: target.positionCatalogs[0].third,
+      positionCatalogSecondTag: target.positionCatalogs[0].secondary,
+      positionCatalogFirstTag: target.positionCatalogs[0].first,
+      jobTypeCad: target.jobTypeCode,
+      jobSearchStatusCad: target.jobSearchStatusCode,
+      provinceTag: target.cities[0].province,
+      cityTag: target.cities[0].city,
+      districtTag: target.cities[0].district,
     });
   },
 

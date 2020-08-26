@@ -49,7 +49,7 @@ Page({
   keep: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}/qualifications`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/qualification`, // 拼接接口地址(前面为公共部分)
       method: 'post',
       header: {
         'content-type': 'application/json',
@@ -60,7 +60,7 @@ Page({
       },
       success(res) {
         if (app.globalData.token) {
-          if(res.data.code === 201) {
+          if(res.statusCode === 200) {
             wx.navigateBack({
               delta: 1, //返回上一个页面
             })

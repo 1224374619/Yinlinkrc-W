@@ -1,47 +1,4 @@
-var formatNumber = function (n) {
-  n = n.toString()
-  return n[1] ? n : '0' + n
-}
 
-var regYear = getRegExp("(y+)", "i");
-
-var dateFormat = function (timestamp, format) {
-  if (!format) {
-    format = "yyyy-MM-dd hh:mm:ss";
-  }
-  timestamp = parseInt(timestamp);
-  var realDate = getDate(timestamp);
-
-  function timeFormat(num) {
-    return num < 10 ? '0' + num : num;
-  }
-  var date = [
-    ["M+", timeFormat(realDate.getMonth() + 1)],
-    ["d+", timeFormat(realDate.getDate())],
-    ["h+", timeFormat(realDate.getHours())],
-    ["m+", timeFormat(realDate.getMinutes())],
-    ["s+", timeFormat(realDate.getSeconds())],
-    ["q+", Math.floor((realDate.getMonth() + 3) / 3)],
-    ["S+", realDate.getMilliseconds()],
-  ];
-  var reg1 = regYear.exec(format);
-  // console.log(reg1[0]);
-  if (reg1) {
-
-    format = format.replace(reg1[1], (realDate.getFullYear() + '').substring(4 - reg1[1].length));
-  }
-  for (var i = 0; i < date.length; i++) {
-    var k = date[i][0];
-    var v = date[i][1];
-
-    var reg2 = getRegExp("(" + k + ")").exec(format);
-    if (reg2) {
-      format = format.replace(reg2[1], reg2[1].length == 1 ?
-        v : ("00" + v).substring(("" + v).length));
-    }
-  }
-  return format;
-}
 
 var positionCatalog = function (index) {
   var a
@@ -168,19 +125,6 @@ var isUnified = function (index) {
   return a;
 }
 
-var sex = function (index) {
-  var a
-  switch (index) {
-    case 0:
-      a = '男'
-      break;
-    case 1:
-      a = '女'
-      break;
-  }
-  return a;
-}
-
 
 var sub = function (val, start = 0, end = 10) {
   if (val.length == 0 || val == undefined) {
@@ -219,16 +163,35 @@ var level = function (index) {
   var a
   switch (index) {
     case 'NORMAL':
-      a = '一般'
+      a = 0
       break;
     case 'GOOD':
-      a = '良好'
+      a = 1
       break;
     case 'PROFICIENT':
-      a = '熟练'
+      a = 2
       break;
     case 'MASTER':
-      a = '精通'
+      a = 3
+      break
+  }
+  return a;
+}
+
+var levels = function (index) {
+  var a
+  switch (index) {
+    case 0:
+      a = 'NORMAL'
+      break;
+    case 1:
+      a = 'GOOD'
+      break;
+    case 2:
+      a = 'PROFICIENT'
+      break;
+    case 3:
+      a = 'MASTER'
       break
   }
   return a;
@@ -252,6 +215,19 @@ var size = function (index) {
   }
   return a;
 }
+var sex = function (index) {
+  var a
+  switch (index) {
+    case 0:
+      a = '男'
+      break;
+    case 1:
+      a = '女'
+      break;
+  }
+  return a;
+}
+
 
 var politicalStatus = function (index) {
   var a
@@ -318,7 +294,6 @@ var CodeToTag = function (codeArr, list, Alias) {
   return tagArr;
 }
 module.exports = {
-  dateFormat: dateFormat,
   qualifications: qualifications,
   jobType: jobType,
   quality: quality,
@@ -330,5 +305,6 @@ module.exports = {
   jobSearchStatus: jobSearchStatus,
   sub: sub,
   positionCatalog: positionCatalog,
-  sex: sex
+  sex:sex,
+  levels:levels
 }

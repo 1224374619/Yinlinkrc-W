@@ -2,6 +2,7 @@
 var positionCatalogList = require('../../utils/positionCatalog.js');
 var industryList = require('../../utils/industry.js');
 var cityData = require('../../utils/city.js');
+const timeUtil = require('../../utils/timeUtil.js');
 const app = getApp()
 const time = require("../../utils/util.js");
 import WxValidate from '../../utils/WxValidate.js'
@@ -14,26 +15,34 @@ Page({
     citysData: cityData.city,
     provinces: [],
     citys: [],
+    districts: [],
     value: [0, 0, 0],
+    provinceTag: '',
+    cityTag: '',
+    districtTag: '',
+    showModalStatus: false,
+    showModalStatusCity: false,
+    cityCode: '',
+    districtCode: '',
+    provinceCode: '',
 
     positionData: positionCatalogList.positionCatalog,
     positionCatalogFirst: [],
     positionCatalogSecond: [],
     positionCatalogThird: [],
     valuePosition: [0, 0, 0],
+    positionCatalogFirstTag: '',
+    positionCatalogSecondTag: '',
+    PositionTag: '',
+    PositionCode: '',
 
     industryData: industryList.industry,
     industryFirst: [],
     industrySecond: [],
     valueIndustry: [0, 0, 0],
-
-    PositionTag: '',
-    PositionCode: '',
-    industryTag: '',
+    industryFirstTag:'',
+    industrySecondTag:'',
     industryCode: '',
-    cityTag: '',
-    cityCode: '',
-    provinceCode:'',
 
     isDaytime: true,
     showModalStatus: false,
@@ -136,29 +145,38 @@ Page({
   },
   //城市
   initData: function () {
+    var cities = this.data.citysData
     var provinces = [];
     var citys = [];
+    var districts = [];
+
+    var provincesObj = {};
+    var citysObj = {};
 
     this.data.citysData.forEach(function (province, i) {
       console.log(i)
       provinces.push(province.tag);
-      if (i === 0) {
-        citys.push(province.children[i].tag);
-      }
     });
-
+    provincesObj = cities[0];
+    provincesObj.children.forEach(function (v) {
+      citys.push(v.tag);
+    });
+    citysObj = provincesObj.children[0];
+    citysObj.children.forEach(function (v) {
+      districts.push(v.tag);
+    });
     this.setData({
       provinces: provinces,
       citys: citys,
+      districts: districts
     });
   },
-
   bindChange: function (e) {
-    console.log(e)
     var citysData = this.data.citysData;
     var value = this.data.value;
     var current_value = e.detail.value;
     var citys = [];
+    var districts = [];
 
     var provinceObj = {};
     var cityObj = {};
@@ -170,16 +188,17 @@ Page({
     this.setData({
       citys: citys
     });
-    console.log(value[0], current_value[0])
     if (value[0] != current_value[0]) {
       // 滑动省份
       cityObj = provinceObj.children[0];
-      console.log(cityObj)
+      cityObj.children.forEach(function (v) {
+        districts.push(v.tag);
+      });
       this.setData({
-        // areas: cityObj.areas,
+        districts: districts,
+        provinceTag: provinceObj.tag,
         value: [current_value[0], 0, 0]
       });
-
     } else if (value[0] === current_value[0] && value[1] !== current_value[1]) {
       // 滑动城市
       if (current_value[1] >= provinceObj.children.length) {
@@ -187,8 +206,21 @@ Page({
         return;
       }
       cityObj = provinceObj.children[current_value[1]];
+      cityObj.children.forEach(function (v) {
+        districts.push(v.tag);
+      });
       this.setData({
+        cityTag: cityObj.tag,
+        districts: districts,
         value: [current_value[0], current_value[1], 0]
+      });
+    } else {
+      // 滑动区县
+      cityObj = provinceObj.children[current_value[1]];
+      this.setData({
+        value: current_value,
+        districtTag: cityObj.children[this.data.value[2]].tag,
+        districtCode: cityObj.children[this.data.value[2]].code,
       });
     }
     if (cityObj.code === null) {
@@ -199,10 +231,12 @@ Page({
       this.setData({
         cityTag: cityObj.tag,
         cityCode: cityObj.code,
-        provinceCode: provinceObj.code
+        provinceTag: provinceObj.tag,
+        provinceCode: provinceObj.code,
+        districtTag: cityObj.children[this.data.value[2]].tag,
+        districtCode: cityObj.children[this.data.value[2]].code,
       });
     }
-    
   },
   //职位类型
   initPosition: function () {
@@ -215,22 +249,7 @@ Page({
     var positionCatalogSecondObj = {};
 
     this.data.positionData.forEach(function (positionCatalogFirsts, i) {
-      console.log(positionCatalogFirsts.tag)
-      console.log(positionCatalogFirsts)
       positionCatalogFirst.push(positionCatalogFirsts.tag);
-      // positionCatalogSecondObj = positionCatalogFirstObj.children[0];
-      // console.log(positionCatalogSecondObj.children)
-      // positionCatalogSecondObj.children.forEach(function (v) {
-      //   positionCatalogThird.push(v.tag);
-      // });
-      // positionCatalogFirsts.forEach(function (v) {
-      //   positionCatalogSecond.push(v.tag);
-      // });
-      // console.log(positionCatalogSecond)
-      // if (i == 0) {
-      //   positionCatalogSecond.push(positionCatalogFirsts.children[i].tag);
-      //   positionCatalogThird.push(positionCatalogFirsts.children[i].children[i].tag)
-      // }
     })
     positionCatalogFirstObj = positionCatalog[0];
     positionCatalogFirstObj.children.forEach(function (v) {
@@ -266,11 +285,11 @@ Page({
     if (valuePosition[0] != current_value[0]) {
       // 滑动省份
       positionCatalogSecondObj = positionCatalogFirstObj.children[0];
-      console.log(positionCatalogSecondObj.children)
       positionCatalogSecondObj.children.forEach(function (v) {
         positionCatalogThird.push(v.tag);
       });
       this.setData({
+        positionCatalogFirstTag: positionCatalogFirstObj.tag,
         positionCatalogThird: positionCatalogThird,
         valuePosition: [current_value[0], 0, 0]
       });
@@ -282,11 +301,12 @@ Page({
         return;
       }
       positionCatalogSecondObj = positionCatalogFirstObj.children[current_value[1]];
-      console.log(positionCatalogSecondObj)
       positionCatalogSecondObj.children.forEach(function (v) {
         positionCatalogThird.push(v.tag);
       });
+      console.log(positionCatalogSecondObj.tag)
       this.setData({
+        positionCatalogSecondTag: positionCatalogSecondObj.tag,
         positionCatalogThird: positionCatalogThird,
         valuePosition: [current_value[0], current_value[1], 0]
       });
@@ -303,6 +323,8 @@ Page({
       });
     } else {
       this.setData({
+        positionCatalogFirstTag: positionCatalogFirstObj.tag,
+        positionCatalogSecondTag: positionCatalogSecondObj.tag,
         PositionTag: positionCatalogSecondObj.children[this.data.valuePosition[2]].tag,
         PositionCode: positionCatalogSecondObj.children[this.data.valuePosition[2]].code
       });
@@ -328,7 +350,6 @@ Page({
     });
   },
   bindChangeIndustry: function (e) {
-    console.log('1111111')
     var industryData = this.data.industryData;
     var valueIndustry = this.data.valueIndustry;
     var current_value = e.detail.value;
@@ -364,11 +385,12 @@ Page({
     }
     if (industrySecondObj.code === null) {
       this.setData({
-        industryTag: ''
+        industrySecondTag: ''
       });
     } else {
       this.setData({
-        industryTag: industrySecondObj.tag,
+        industrySecondTag: industrySecondObj.tag,
+        industryFirstTag: industryFirstObj.tag,
         industryCode: industrySecondObj.code
       });
     }
@@ -610,7 +632,7 @@ Page({
   keep: function () {
     let that = this;
     wx.request({
-      url: app.config.uploadHost + `/resumes/${app.globalData.resumeId}/target`, // 拼接接口地址(前面为公共部分)
+      url: app.config.uploadHost + `/resume/${app.globalData.resumeId}/target`, // 拼接接口地址(前面为公共部分)
       method: 'put',
       header: {
         'content-type': 'application/json',
@@ -618,16 +640,24 @@ Page({
       },
       data: {
         arriveTime: null,
-        county: that.data.cityCode,
+        cities: [{
+          city: that.data.cityTag,
+          district: that.data.districtTag,
+          province: that.data.provinceTag,
+        }],
         industries: [{
-          code: that.data.industryCode
+          first:  that.data.industryFirstTag,
+          secondary: that.data.industrySecondTag,
         }],
-        jobSearchStatus: 1,
-        jobType: 1,
+        jobSearchStatus: timeUtil.jobSearchStatus(parseInt(that.data.jobSearchStatusCad)),
+        jobSearchStatusCode: that.data.jobSearchStatusCad,
+        jobType: timeUtil.jobType(parseInt(that.data.jobTypeCad)),
+        jobTypeCode: that.data.jobTypeCad,
         positionCatalogs: [{
-          code: that.data.PositionCode
+          first: that.data.positionCatalogFirstTag,
+          secondary: that.data.positionCatalogSecondTag,
+          third: that.data.PositionTag
         }],
-        province: that.data.provinceCode,
         salaryMin: that.data.salaryMin,
         salaryMax: that.data.salaryMax,
       },
