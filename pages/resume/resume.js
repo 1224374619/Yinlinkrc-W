@@ -68,20 +68,23 @@ Page({
       },
       success(res) {
         if (app.globalData.token) {
+          console.log(app.globalData.token)
           let resumeList = res.data.data
           let defaultResumeId = res.data.data.defaultResumeId
           app.globalData.resumeId = defaultResumeId
-          wx.setStorageSync('2', res.data.data.base.avatarUrl)
-          var value = wx.getStorageSync('2')
-          if (value) {
-            that.setData({
-              avatarUrl: value
-            });
-          } else {
-            that.setData({
-              avatarUrl: res.data.data.avatarUrl
-            });
-            wx.setStorageSync('2', res.data.data.avatarUrl)
+          if (res.data.data.base !== null) {
+            wx.setStorageSync('2', res.data.data.base.avatarUrl)
+            var value = wx.getStorageSync('2')
+            if (value) {
+              that.setData({
+                avatarUrl: value
+              });
+            } else {
+              that.setData({
+                avatarUrl: res.data.data.avatarUrl
+              });
+              wx.setStorageSync('2', res.data.data.avatarUrl)
+            }
           }
           that.setData({ //通过setData来修改
             resumeList: resumeList,
@@ -282,7 +285,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
     if (app.globalData.token) {
       this.setData({
         logout: true
@@ -315,7 +318,7 @@ Page({
     if (app.globalData.resumeId === 0) {
       this.initialize()
       this.brief()
-    }else {
+    } else {
       this.brief()
     }
     wx.hideHomeButton()

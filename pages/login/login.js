@@ -92,9 +92,9 @@ Page({
         } else if (app.globalData.systemInfo == "android") {
           app.globalData.token = res.header['Auth-Token']
         }
-        if (app.globalData.model == "iPhone X (GSM+CDMA)<iPhone10,3>") {
-          app.globalData.token = res.header['Auth-Token']
-        }
+        // if (app.globalData.model == "iPhone X (GSM+CDMA)<iPhone10,3>") {
+        //   app.globalData.token = res.header['Auth-Token']
+        // }
         if (app.globalData.token) {
           $Toast({
             content: '登录成功',

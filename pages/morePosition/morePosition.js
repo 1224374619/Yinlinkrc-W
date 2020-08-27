@@ -93,6 +93,10 @@ Page({
     wx.request({
       url: app.config.uploadHost + `/company/${that.data.companyId}/positions`, // 拼接接口地址(前面为公共部分)
       method: 'get',
+      data: {
+        pageNum: 1,
+        pageSize: 10,
+      },
       header: {
         'content-type': 'application/json',
         'Auth-Token':app.globalData.token
